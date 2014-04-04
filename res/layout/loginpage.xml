@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:context=".LinearLayout" 
+                android:background="#c1e2ff">
+                
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="10px"
+                            android:paddingTop="20px"
+                            android:text="@string/login"
+                            android:textSize="20dp" />
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="10px"
+                            android:paddingTop="20px"
+                            android:text="@string/welcome"
+                            android:textSize="35dp" />
+                        
+                                    <LinearLayout
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="25dp"
+                                       >
+                                
+                                                                       
+                                        <EditText
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/backedittext"
+                                            android:hint="@string/email"
+                                            android:padding="10dp"
+                                            android:layout_marginLeft="25dp"
+                                            android:layout_marginRight="25dp"
+                                            />
+                                        
+                                        
+
+                                    </LinearLayout>
+                        
+                                    <LinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                     android:layout_marginTop="8dp"
+                                     >
+                                    
+                                                                                                                
+                                                        <EditText
+                                                            android:layout_width="fill_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:hint="@string/password" 
+                                                             android:background="@drawable/backedittext"
+                                                             android:padding="10dp"
+                                                             android:layout_marginLeft="25dp"
+                                            android:layout_marginRight="25dp"
+                                                             />
+                                 
+                                    </LinearLayout>
+                                    
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="10px"
+                            android:text="@string/login" 
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:background="@drawable/backlogin"
+                            />
+                       <LinearLayout 
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:gravity="center"
+android:orientation="horizontal" 
+android:layout_marginTop="61dp"
+android:layout_marginBottom="61dp">
+
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_weight="1"
+    android:background="#78133a"
+     />
+
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/or" 
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:textSize="17dp"
+    />
+
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:background="#78133a"
+    />
+</LinearLayout>
+                        
+                        <Button
+                            
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/loginWithFacebook" 
+                            android:background="#3b5999"
+                            />
+            
+            </LinearLayout>
