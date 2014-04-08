@@ -20,6 +20,7 @@
     <string name="name">Dein Name</string>
     <string name="passwordAgain">Passwort wiederholen</string>
     <string name="signup">Registrierung abschließen</string>
+    <string name="dont">Register a free account</string>
 <string name="or">or</string> 
- 
+ <item type="id" name="pager"/>
 </resources>

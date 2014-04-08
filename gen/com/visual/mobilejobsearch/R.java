@@ -31,32 +31,43 @@ public final class R {
         public static final int backlogin=0x7f020002;
         public static final int backnavi=0x7f020003;
         public static final int ic_launcher=0x7f020004;
-        public static final int loginbutton=0x7f020005;
-        public static final int message=0x7f020006;
-        public static final int navigator=0x7f020007;
-        public static final int profile=0x7f020008;
-        public static final int scanner=0x7f020009;
-        public static final int setting=0x7f02000a;
-        public static final int theme=0x7f02000b;
+        public static final int icon=0x7f020005;
+        public static final int loginbutton=0x7f020006;
+        public static final int message=0x7f020007;
+        public static final int navigator=0x7f020008;
+        public static final int no_profile=0x7f020009;
+        public static final int profile=0x7f02000a;
+        public static final int scanner=0x7f02000b;
+        public static final int setting=0x7f02000c;
+        public static final int theme=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f090010;
-        public static final int iconApplication=0x7f09000a;
-        public static final int iconMessage=0x7f09000c;
-        public static final int iconNavigator=0x7f090002;
-        public static final int iconProfile=0x7f090000;
-        public static final int iconScan=0x7f090008;
-        public static final int iconSetting=0x7f09000e;
-        public static final int iconTheme=0x7f090006;
-        public static final int nNavigator=0x7f090005;
-        public static final int nameApplication=0x7f09000b;
-        public static final int nameMessage=0x7f09000d;
-        public static final int nameNavigator=0x7f090003;
-        public static final int nameProfile=0x7f090001;
-        public static final int nameScan=0x7f090009;
-        public static final int nameTheme=0x7f090007;
-        public static final int numberNavigator=0x7f090004;
-        public static final int textView1=0x7f09000f;
+        public static final int action_settings=0x7f070019;
+        public static final int iconApplication=0x7f07000b;
+        public static final int iconMessage=0x7f07000d;
+        public static final int iconNavigator=0x7f070003;
+        public static final int iconProfile=0x7f070001;
+        public static final int iconScan=0x7f070009;
+        public static final int iconSetting=0x7f07000f;
+        public static final int iconTheme=0x7f070007;
+        public static final int nNavigator=0x7f070006;
+        public static final int nameApplication=0x7f07000c;
+        public static final int nameMessage=0x7f07000e;
+        public static final int nameNavigator=0x7f070004;
+        public static final int nameProfile=0x7f070002;
+        public static final int nameScan=0x7f07000a;
+        public static final int nameTheme=0x7f070008;
+        public static final int numberNavigator=0x7f070005;
+        public static final int pager=0x7f070000;
+        public static final int profileView=0x7f070012;
+        public static final int profileViewText=0x7f070013;
+        public static final int registerAccount=0x7f070010;
+        public static final int signUpButton=0x7f070018;
+        public static final int signUpEmail=0x7f070015;
+        public static final int signUpName=0x7f070014;
+        public static final int signUpPassword=0x7f070016;
+        public static final int signUpPasswordAgain=0x7f070017;
+        public static final int textView1=0x7f070011;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -64,12 +75,13 @@ public final class R {
         public static final int signuppage=0x7f030002;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int application=0x7f060007;
+        public static final int dont=0x7f060013;
         public static final int email=0x7f06000c;
         public static final int foto=0x7f06000f;
         public static final int hello_world=0x7f060002;
@@ -78,7 +90,7 @@ public final class R {
         public static final int message=0x7f060008;
         public static final int name=0x7f060010;
         public static final int navigator=0x7f060004;
-        public static final int or=0x7f060013;
+        public static final int or=0x7f060014;
         public static final int password=0x7f06000d;
         public static final int passwordAgain=0x7f060011;
         public static final int profile=0x7f060003;
@@ -110,10 +122,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }
