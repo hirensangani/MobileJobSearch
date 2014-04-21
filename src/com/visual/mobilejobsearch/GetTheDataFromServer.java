@@ -1,8 +1,5 @@
 //package com.visual.mobilejobsearch;
 //
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
 //import java.util.ArrayList;
 //import java.util.List;
 //
@@ -11,10 +8,12 @@
 //import org.apache.http.NameValuePair;
 //import org.apache.http.client.HttpClient;
 //import org.apache.http.client.entity.UrlEncodedFormEntity;
+//import org.apache.http.client.methods.HttpGet;
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.impl.client.DefaultHttpClient;
 //import org.apache.http.message.BasicNameValuePair;
 //import org.apache.http.util.EntityUtils;
+//import org.json.JSONException;
 //import org.json.JSONObject;
 //
 //import android.app.Activity;
@@ -25,12 +24,12 @@
 //import android.util.Log;
 //import android.widget.Toast;
 //
-//public class SubmitDataToTheServer  extends AsyncTask<Void, String, Void> {
+//public class GetTheDataFromServer  extends AsyncTask<Void, String, Void> {
 //		private List<NameValuePair> nameValuePairs;
 //		private HttpClient httpclient;
-//		private HttpPost httppost;
 //		HttpResponse httpResponse= null;
 //		HttpEntity httpEntity = null;
+//		HttpGet httpGet=null;
 //		public static String response = null;
 //		
 //		private static final String TAG_VORNAME = "first_name";
@@ -41,10 +40,10 @@
 //		
 //		
 //		
-//		public SubmitDataToTheServer(Activity activity) {
+//		public GetTheDataFromServer(Activity activity) {
 //			nameValuePairs = new ArrayList<NameValuePair>();
 //			httpclient = new DefaultHttpClient();
-//			httppost = new HttpPost("http://preparo.unter-guten-freunden.de/api/v1/register/");
+//			httpGet = new HttpGet("http://preparo.unter-guten-freunden.de/api/v1/token/auth/");
 ////			if (isNetworkAvailable(activity)) {
 ////				Log.e("activity", "isNetworkAvailable");
 //				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -64,11 +63,11 @@
 //	BasicNameValuePair bName=new BasicNameValuePair("last_name", Name);
 //	BasicNameValuePair bVor=new BasicNameValuePair("first_name", VorName);
 //			if (nameValuePairs.size() == 0) {
-//				nameValuePairs.add(bEmail);
 //				nameValuePairs.add(bUser);
+//				nameValuePairs.add(bEmail);
 //				nameValuePairs.add(bPass);
-//				nameValuePairs.add(bVor);
 //				nameValuePairs.add(bName);
+//				nameValuePairs.add(bVor);
 //			}
 //			
 //		}
@@ -107,8 +106,7 @@
 //						//nameValuePairs.removeAll(nameValuePairs);
 //					    httpEntity=httpResponse.getEntity();
 //					    response=EntityUtils.toString(httpEntity);
-//					    Log.e("httpresponse", String.valueOf(httpResponse.getStatusLine().getStatusCode()));
-//					    
+//					//    Log.e("response", response);
 //					    
 //					    if(response!=null){
 //					    	JSONObject jsonObj= new JSONObject(response);
@@ -119,10 +117,7 @@
 //					    	jsonObj.getString(TAG_USER);
 //					    	
 //					    	Log.e("Strings",jsonObj.getString(TAG_USER));
-//					    	Log.e("Strings",jsonObj.getString("key"));
-//					    	Log.e("response",response);
 //					    }
-//					    Log.e("response",response);
 //
 //					} catch (Exception e) {
 //						//Log.e("DoPost", "exeption!!!");

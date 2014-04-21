@@ -14,7 +14,7 @@ public class FullDetails extends Fragment{
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		final View myFragmentView = inflater.inflate(
-		R.layout.signuppage, container, false);
+		R.layout.full_profile_details, container, false);
 		return myFragmentView;
 
 }

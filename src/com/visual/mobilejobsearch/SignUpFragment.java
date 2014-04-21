@@ -40,7 +40,7 @@ public class SignUpFragment extends FragmentActivity{
 
 		setContentView(mViewPager);
 		bar = getActionBar();
-		bar.setTitle("Vital Data");
+		bar.setTitle("Profile Views");
 		bar.setDisplayHomeAsUpEnabled(true);
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 

@@ -8,14 +8,14 @@
                 android:background="#F2F2F2"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 >
-                
+     <!--         
                       <ImageView
     android:id="@+id/profileView"
     android:layout_width="150dp"
     android:layout_height="130dp"
     android:src="@drawable/no_profile" 
-    android:layout_marginLeft="80dp"
-    android:layout_marginRight="60dp"
+    android:layout_marginLeft="100dp"
+    android:layout_marginRight="80dp"
     android:layout_marginTop="10dp"
     android:cropToPadding="true"
     />
@@ -32,6 +32,7 @@
     android:textColor="#000000"
     android:background="#7F000000" 
   />
+   -->  
 <EditText
 android:id="@+id/signUpName"
 android:layout_width="fill_parent"
@@ -41,8 +42,35 @@ android:hint="@string/name"
 android:padding="10dp"
 android:layout_marginLeft="25dp"
 android:layout_marginRight="25dp"
-android:layout_marginTop="25dp"
-android:layout_below="@+id/profileViewText"
+android:layout_marginTop="20dp"
+android:inputType="text"
+/>
+
+<EditText
+android:id="@+id/signUpFirstName"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/backedittext"
+android:hint="@string/firstname"
+android:padding="10dp"
+android:layout_marginLeft="25dp"
+android:layout_marginRight="25dp"
+android:layout_marginTop="20dp"
+android:layout_below="@+id/signUpName"
+android:inputType="text"
+/>
+
+<EditText
+android:id="@+id/signUpUsername"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/backedittext"
+android:hint="@string/username"
+android:padding="10dp"
+android:layout_marginLeft="25dp"
+android:layout_marginRight="25dp"
+android:layout_marginTop="20dp"
+android:layout_below="@+id/signUpFirstName"
 />
 
 <EditText
@@ -54,8 +82,9 @@ android:hint="@string/email"
 android:padding="10dp"
 android:layout_marginLeft="25dp"
 android:layout_marginRight="25dp"
-android:layout_marginTop="15dp"
-android:layout_below="@+id/signUpName"
+android:layout_marginTop="20dp"
+android:layout_below="@+id/signUpUsername"
+android:inputType="textEmailAddress"
 />
 
 <EditText
@@ -67,8 +96,9 @@ android:hint="@string/password"
 android:padding="10dp"
 android:layout_marginLeft="25dp"
 android:layout_marginRight="25dp"
-android:layout_marginTop="15dp"
+android:layout_marginTop="20dp"
 android:layout_below="@+id/signUpEmail"
+android:inputType="textPassword"
 
 />
 
@@ -81,8 +111,9 @@ android:hint="@string/passwordAgain"
 android:padding="10dp"
 android:layout_marginLeft="25dp"
 android:layout_marginRight="25dp"
-android:layout_marginTop="15dp"
+android:layout_marginTop="20dp"
 android:layout_below="@+id/signUpPassword"
+android:inputType="textPassword"
 />
 
 <Button

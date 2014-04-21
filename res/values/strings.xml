@@ -17,7 +17,9 @@
     <string name="password">Passwort</string>
     <string name="loginWithFacebook">Einloggen mit Facebook</string>
     <string name="foto">Foto hinzufügen</string>
-    <string name="name">Dein Name</string>
+    <string name="name">Name</string>
+    <string name="firstname">Vorname</string>
+    <string name="username">Username</string>
     <string name="passwordAgain">Passwort wiederholen</string>
     <string name="signup">Registrierung abschließen</string>
     <string name="dont">Register a free account</string>
