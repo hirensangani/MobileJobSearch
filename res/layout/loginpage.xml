@@ -34,6 +34,7 @@
                                 
                                                                        
                                         <EditText
+                                            android:id="@+id/loginUserName"
                                             android:layout_width="fill_parent"
                                             android:layout_height="wrap_content"
                                             android:background="@drawable/backedittext"
@@ -56,6 +57,7 @@
                                     
                                                                                                                 
                                                         <EditText
+                                                            android:id="@+id/loginPassword"
                                                             android:layout_width="fill_parent"
                                                             android:layout_height="wrap_content"
                                                             android:layout_gravity="center_horizontal"
@@ -63,12 +65,14 @@
                                                              android:background="@drawable/backedittext"
                                                              android:padding="10dp"
                                                              android:layout_marginLeft="25dp"
-                                            android:layout_marginRight="25dp"
+                                                            android:layout_marginRight="25dp"
+                                                           android:inputType="textPassword"
                                                              />
                                  
                                     </LinearLayout>
                                     
                         <Button
+                            android:id="@+id/loginButton"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

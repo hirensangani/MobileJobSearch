@@ -2,6 +2,26 @@ package serverStuff;
 
 public class Person {
 
+	String Name, Vorname, Username, Email, Password, loginUser, loginPassword;
+	
+	public String getLoginUserName() {
+		return loginUser;
+	}
+	
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+	
+	public void setLoginUserName(String Username) {
+		loginUser=Username;
+	}
+	
+	public void setLoginPassword(String Password) {
+	    loginPassword=Password;
+	}
+	
+	
+	
 	/**
 	 * @return the name
 	 */
@@ -72,6 +92,6 @@ public class Person {
 		Password = password;
 	}
 
-	String Name, Vorname, Username, Email, Password;
+	
 	
 }

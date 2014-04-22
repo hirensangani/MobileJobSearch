@@ -63,11 +63,13 @@ public class registerUser {
             Log.e("httpresponse", String.valueOf(httpResponse.getStatusLine().getStatusCode()));
  
             // 10. convert inputstream to string
-            if(inputStream != null)
+            if(inputStream != null){
                 result = convertInputStreamToString(inputStream);
-            else
+                Log.e("result",result );
+            } else{
                 result = "Did not work!";
- 
+                Log.e("result",result );
+            }
         } catch (Exception e) {
             Log.d("InputStream", e.getLocalizedMessage());
         }

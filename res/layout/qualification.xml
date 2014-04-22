@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F2F2F2" >
+
+    <TextView
+        android:id="@+id/textViewNew"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/newPosition"
+        android:paddingLeft="15dp"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+         <EditText
+             android:id="@+id/QDegreeName"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/textViewNew"
+             android:background="@drawable/degree_button"
+             android:hint="@string/newDegree"
+             android:padding="8dp"
+             android:textSize="13sp"
+             android:layout_margin="5dp"
+             />
+
+         <TextView
+             android:id="@+id/textViewVon"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignBottom="@+id/TextViewBis"
+             android:layout_alignLeft="@+id/QVon"
+             android:text="@string/von"
+             android:textSize="10sp"
+             android:textStyle="bold" />
+
+         <TextView
+             android:id="@+id/TextViewBis"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/QBis"
+             android:layout_below="@+id/QDegreeName"
+             android:text="@string/bis"
+            android:textSize="10sp"
+             android:textStyle="bold" />
+         
+             <EditText
+             android:id="@+id/QVon"
+             android:layout_marginTop="20dp"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:layout_alignBaseline="@+id/QBis"
+             android:layout_alignBottom="@+id/QBis"
+             android:layout_alignLeft="@+id/QDegreeName"
+             android:layout_marginLeft="38dp"
+             android:hint="@string/timeHint"
+             android:inputType="number"
+             android:textSize="8sp" 
+             android:background="@drawable/time"
+              android:gravity="center"
+           />
+
+          <EditText
+             android:layout_marginTop="20dp"
+             android:id="@+id/QBis"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/QDegreeName"
+             android:layout_marginLeft="70dp"
+             android:layout_toRightOf="@+id/QVon"
+             android:inputType="number"
+             android:hint="@string/timeHint"
+              android:textSize="8sp"
+              android:background="@drawable/time"
+              android:gravity="center"
+              />
+
+          <TextView
+              android:id="@+id/TextViewNameInstitute"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/QVon"
+              android:layout_marginTop="16dp"
+              android:paddingLeft="15dp"
+              android:text="@string/newInstitute"
+              android:textSize="10sp"
+              android:textStyle="bold" />
+
+          <EditText
+              android:id="@+id/EditTextNameOfInstitute"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/TextViewNameInstitute"
+              android:layout_margin="5dp"
+              android:layout_marginTop="14dp"
+              android:background="@drawable/degree_button"
+              android:hint="@string/newInstituteName"
+              android:padding="8dp"
+              android:textSize="13sp" />
+
+          <EditText
+              android:id="@+id/EditTextStreet"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/EditTextNameOfInstitute"
+              android:layout_margin="5dp"
+              android:background="@drawable/time"
+              android:hint="@string/newStreet"
+              android:padding="8dp"
+              android:textSize="13sp" />
+
+          <EditText
+              android:id="@+id/EditText01"
+              android:layout_width="80dp"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/QVon"
+              android:layout_below="@+id/EditTextStreet"
+              android:layout_marginTop="19dp"
+              android:background="@drawable/time"
+              android:ems="10"
+              android:gravity="center"
+              android:hint="@string/newZipCode"
+              android:inputType="number"
+              android:textSize="10sp" />
+
+          <EditText
+              android:id="@+id/EditText02"
+              android:layout_width="80dp"
+              android:layout_height="wrap_content"
+              android:layout_alignBaseline="@+id/EditText01"
+              android:layout_alignBottom="@+id/EditText01"
+              android:layout_alignLeft="@+id/QBis"
+              android:background="@drawable/time"
+              android:ems="10"
+              android:gravity="center"
+              android:hint="@string/newCity"
+              android:inputType="number"
+              android:textSize="10sp" />
+
+</RelativeLayout>
