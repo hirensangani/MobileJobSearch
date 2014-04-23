@@ -1,24 +1,15 @@
 package com.visual.mobilejobsearch;
 
 
-import java.util.ArrayList;
-
-import serverStuff.Person;
-import serverStuff.loginUser;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Response.ErrorListener;
@@ -27,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.visual.mobilejobsearch.database.api.APIAccess;
 import com.visual.mobilejobsearch.database.api.APIAccessFactory;
 import com.visual.mobilejobsearch.database.calls.GetLogin;
+import com.visual.mobilejobsearch.persistent.Preferences;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -68,6 +60,10 @@ public class MainActivity extends FragmentActivity {
 					@Override
 					public void onResponse(GetLogin response) {
                    
+						Preferences preference = new Preferences(getApplicationContext());
+						preference.putApiKey(response.key);
+						preference.putUser(response.username);
+						
 						Log.e("apiKey", response.key);
 						
 						Intent intent = new Intent(MainActivity.this, OpeningApplicationFragment.class);
@@ -93,21 +89,21 @@ public class MainActivity extends FragmentActivity {
 		
 	}
 	
-	class HttpAsyncTaskGet extends AsyncTask<String, Void, String> {
-		
-		Person person;
-
-		@Override
-		protected String doInBackground(String... urls) {
-
-		        person = new Person();
-		        person.setLoginUserName(userName.getText().toString());
-		        person.setLoginPassword(password.getText().toString());
-			
-			return loginUser.GET(urls[0],person);
-		}
-
-	}
+//	class HttpAsyncTaskGet extends AsyncTask<String, Void, String> {
+//		
+//		Person person;
+//
+//		@Override
+//		protected String doInBackground(String... urls) {
+//
+//		        person = new Person();
+//		        person.setLoginUserName(userName.getText().toString());
+//		        person.setLoginPassword(password.getText().toString());
+//			
+//			return loginUser.GET(urls[0],person);
+//		}
+//
+//	}
 	
 	
 	

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Preparo</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Logout</string>
     <string name="hello_world">Hello world!</string>
     <string name="profile">Dein Profil</string>
     <string name="navigator">Navigator</string>
@@ -23,8 +23,12 @@
     <string name="passwordAgain">Passwort wiederholen</string>
     <string name="signup">Registrierung abschließen</string>
     <string name="dont">Register a free account</string>
+    <string name="activity_qualification">Qualification</string>
+    <string name="activity_signup">Signup</string>
 <string name="or">or</string> 
- <item type="id" name="pager"/>
+
+<string name="save">Save</string> 
+
  
  <string name="newPosition">Neue Qaulification hinzufügen</string>
  <string name="newInstitute">Institute</string>
@@ -68,5 +72,10 @@
     
      <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+    
+    
+    <!-- for qualification -->
+    
+    <string name="profile_qualification">Qualification</string>
  
 </resources>

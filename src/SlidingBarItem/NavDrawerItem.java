@@ -1,4 +1,4 @@
-package SlidingBar;
+package SlidingBarItem;
 
 public class NavDrawerItem {
 	

@@ -3,23 +3,15 @@ package com.visual.mobilejobsearch;
 
 
 
-import serverStuff.Person;
-import serverStuff.registerUser;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.visual.mobilejobsearch.database.APIErrorListener;
 import com.visual.mobilejobsearch.database.PostError;
 import com.visual.mobilejobsearch.database.api.APIAccess;
@@ -32,8 +24,6 @@ public class GeneralDetails extends FragmentActivity{
 	Button signUpButton;
 	String UserName, EmailAddress, Password, vorName, Name;
 	APIAccess api;
-//	private static SubmitDataToTheServer doPost;
-//	private static Activity activity;
 	
 	
 	@Override
@@ -105,26 +95,26 @@ public class GeneralDetails extends FragmentActivity{
    }
 	
 
-	class HttpAsyncTaskPost extends AsyncTask<String, Void, String> {
-		
-		Person person;
-	    @Override
-	    protected String doInBackground(String... urls) {
-
-	        person = new Person();
-	        person.setEmail(emailEditText.getText().toString());
-	        person.setUsername(userEditText.getText().toString());
-	        person.setPassword(passEditText.getText().toString());
-	        person.setVorname(vorEditText.getText().toString());
-	        person.setName(nameEditText.getText().toString());
-	        
-	        return registerUser.POST(urls[0],person);
-	    }
-	    // onPostExecute displays the results of the AsyncTask.
-	    @Override
-	    protected void onPostExecute(String result) {
-	        Toast.makeText(getApplicationContext(), "Data Sent!", Toast.LENGTH_LONG).show();
-	   }
-	}
+//	class HttpAsyncTaskPost extends AsyncTask<String, Void, String> {
+//		
+//		Person person;
+//	    @Override
+//	    protected String doInBackground(String... urls) {
+//
+//	        person = new Person();
+//	        person.setEmail(emailEditText.getText().toString());
+//	        person.setUsername(userEditText.getText().toString());
+//	        person.setPassword(passEditText.getText().toString());
+//	        person.setVorname(vorEditText.getText().toString());
+//	        person.setName(nameEditText.getText().toString());
+//	        
+//	        return registerUser.POST(urls[0],person);
+//	    }
+//	    // onPostExecute displays the results of the AsyncTask.
+//	    @Override
+//	    protected void onPostExecute(String result) {
+//	        Toast.makeText(getApplicationContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+//	   }
+//	}
 	
 }

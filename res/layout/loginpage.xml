@@ -80,7 +80,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginLeft="25dp"
                             android:layout_marginRight="25dp"
-                            android:background="@drawable/backlogin"
+                            android:background="@drawable/button_custom"
                             />
                         <Button
                             android:id="@+id/registerAccount"

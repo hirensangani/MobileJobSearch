@@ -59,10 +59,12 @@
              android:layout_alignLeft="@+id/QDegreeName"
              android:layout_marginLeft="38dp"
              android:hint="@string/timeHint"
-             android:inputType="number"
+             android:inputType="date"
              android:textSize="8sp" 
              android:background="@drawable/time"
               android:gravity="center"
+              android:maxLength="10"
+
            />
 
           <EditText
@@ -73,11 +75,12 @@
              android:layout_below="@+id/QDegreeName"
              android:layout_marginLeft="70dp"
              android:layout_toRightOf="@+id/QVon"
-             android:inputType="number"
+             android:inputType="date"
              android:hint="@string/timeHint"
               android:textSize="8sp"
               android:background="@drawable/time"
               android:gravity="center"
+              android:maxLength="10"
               />
 
           <TextView
@@ -118,7 +121,7 @@
               android:textSize="13sp" />
 
           <EditText
-              android:id="@+id/EditText01"
+              android:id="@+id/EditText_Qua_ZipCode"
               android:layout_width="80dp"
               android:layout_height="wrap_content"
               android:layout_alignLeft="@+id/QVon"
@@ -132,17 +135,27 @@
               android:textSize="10sp" />
 
           <EditText
-              android:id="@+id/EditText02"
+              android:id="@+id/EditText_Qua_City"
               android:layout_width="80dp"
               android:layout_height="wrap_content"
-              android:layout_alignBaseline="@+id/EditText01"
-              android:layout_alignBottom="@+id/EditText01"
+              android:layout_alignBaseline="@+id/EditText_Qua_ZipCode"
+              android:layout_alignBottom="@+id/EditText_Qua_ZipCode"
               android:layout_alignLeft="@+id/QBis"
               android:background="@drawable/time"
               android:ems="10"
               android:gravity="center"
               android:hint="@string/newCity"
-              android:inputType="number"
+              android:inputType="text"
               android:textSize="10sp" />
+
+           <Button
+               android:id="@+id/Button_Qua_Save"
+               android:layout_width="100dp"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/EditText_Qua_ZipCode"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="20dp"
+               android:text="@string/save"
+               android:textColor="#60A6BB" />
 
 </RelativeLayout>

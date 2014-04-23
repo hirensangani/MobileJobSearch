@@ -88,8 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/profileStatus"
         android:layout_below="@+id/linearLayout1"
-        android:drawableRight="@drawable/ic_home"
-android:background="#F2F2F2"         />
+        android:background="#F2F2F2"
+        android:drawableRight="@drawable/ic_add_plus" 
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -98,6 +99,24 @@ android:background="#F2F2F2"         />
         android:layout_alignBaseline="@+id/addQualification"
         android:layout_alignBottom="@+id/addQualification"
         android:layout_alignLeft="@+id/profileView"
-        android:text="TextView" />
+        android:text="@string/profile_qualification"
+         android:textStyle="bold" />
+    
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_below="@+id/textView1"
+     >
+ 
+            <ExpandableListView
+                android:id="@+id/lvExp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>   
+ 
+</LinearLayout>
+    
+ 
+     
 
 </RelativeLayout>

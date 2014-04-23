@@ -1,4 +1,4 @@
-package SlidingBar;
+package SlidingBarItem;
 
 
 import java.util.ArrayList;

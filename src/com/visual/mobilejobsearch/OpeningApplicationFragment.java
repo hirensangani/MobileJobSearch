@@ -4,18 +4,21 @@ package com.visual.mobilejobsearch;
 
 import java.util.ArrayList;
 
+import com.visual.mobilejobsearch.persistent.Preferences;
+
 import SlidingBar.HomeFragment;
 import SlidingBar.ScannerFragment;
 import SlidingBar.NavigatorFragment;
 import SlidingBar.ProfileFragment;
-import SlidingBar.NavDrawerItem;
-import SlidingBar.NavDrawerListAdapter;
 import SlidingBar.BewerbungenFragment;
 import SlidingBar.SettingsFragment;
 import SlidingBar.ThemenMarktPlatzFragment;
 import SlidingBar.NachrichtenFragment;
+import SlidingBarItem.NavDrawerItem;
+import SlidingBarItem.NavDrawerListAdapter;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -48,6 +51,8 @@ public class OpeningApplicationFragment extends FragmentActivity{
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
+	
+	Preferences preferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +127,11 @@ public class OpeningApplicationFragment extends FragmentActivity{
 			// on first time display view for first nav item
 			displayView(0);
 		}
+		
+		//for Logout
+		
+		 preferences = new Preferences(getApplicationContext());
+		
 	}
 
 	/**
@@ -140,6 +150,8 @@ public class OpeningApplicationFragment extends FragmentActivity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		
+		
 		return true;
 	}
 
@@ -152,6 +164,19 @@ public class OpeningApplicationFragment extends FragmentActivity{
 		// Handle action bar actions click
 		switch (item.getItemId()) {
 		case R.id.action_settings:
+			Log.e("ActionButton", "Logout");
+		//	if(!(preferences.getUser()==null) || !(preferences.getApiKey()==null)){
+				preferences.putUser("");	
+				preferences.putApiKey("");
+				finish();
+				Intent i = new Intent(OpeningApplicationFragment.this, MainActivity.class);
+                startActivity(i);
+                
+                
+//			}else{
+//				Log.d("Logout", "Something wrong");
+//			}
+			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -246,7 +271,13 @@ public class OpeningApplicationFragment extends FragmentActivity{
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		finish();
+		Log.e("onfili", "onStopFragment");
+		super.onStop();
+	}
 
 
 

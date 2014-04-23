@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" >
+        <shape>
+    
+         <solid android:color="#2D85A0" />
+         
+         <size  android:width="60dp"
+                 android:height="25dp"/>
+
+         <corners android:radius="60dp"/>
+            
+         <!--  
+            <gradient
+                android:endColor="@color/blue"
+                android:startColor="@color/AliceBlue"
+                android:angle="270" />
+                -->
+           <!--  
+            <stroke
+                android:width="3dp"
+                android:color="@color/Gray" />
+                -->
+           
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+    
+         <solid android:color="#15A6D2" />
+         
+         <size  android:width="60dp"
+                 android:height="25dp"/>
+
+         <corners android:radius="60dp"/>
+            
+             
+           <!--  
+            <gradient
+                android:endColor="@color/blue"
+                android:startColor="@color/AliceBlue"
+                android:angle="270" />
+                -->
+           <!--  
+            <stroke
+                android:width="3dp"
+                android:color="@color/Gray" />
+                -->
+                 
+        </shape>
+    </item>
+
+    <item>        
+        <shape>
+            
+    
+         <solid android:color="#82b8d0" />
+         
+         <size  android:width="60dp"
+                 android:height="25dp"/>
+
+         <corners android:radius="60dp"/>
+            
+            <!--  
+            <gradient
+                android:endColor="@color/blue"
+                android:startColor="@color/AliceBlue"
+                android:angle="270" />
+                -->
+         <!--  
+            <stroke
+                android:width="3dp"
+                android:color="@color/Gray" />
+                -->
+                        
+                
+        </shape>
+    </item>
+</selector>

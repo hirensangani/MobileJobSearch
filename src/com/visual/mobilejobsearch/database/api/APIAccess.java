@@ -8,6 +8,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.visual.mobilejobsearch.database.APIErrorListener;
 import com.visual.mobilejobsearch.database.GsonGet;
 import com.visual.mobilejobsearch.database.GsonPost;
+import com.visual.mobilejobsearch.database.calls.GetInstitute;
 import com.visual.mobilejobsearch.database.calls.GetLogin;
 import com.visual.mobilejobsearch.database.objects.Institute;
 import com.visual.mobilejobsearch.database.objects.Register;
@@ -20,6 +21,7 @@ public class APIAccess {
 	
 	// GET URLs
 	private static final String GET_LOGIN_URL = API_URL + "token/auth/";
+	private static final String GET_INSTITUE_URL = API_URL + "institute/";
 	
 	// POST URLs
 	private static final String POST_REGISTER_URL = API_URL + "register/";
@@ -45,6 +47,15 @@ public class APIAccess {
 				GetLogin.class,
 				listener,
 				errorListener);
+	}
+	
+	public GsonGet<GetInstitute> newGetInstitute(Listener<GetInstitute> listener, ErrorListener errorListener){
+		return new GsonGet<GetInstitute>(
+				GET_INSTITUE_URL,
+				GetInstitute.class,
+				listener,
+				errorListener
+				);
 	}
 	
 	public GsonPost<Institute> newPostInstitute (String name, String street, String zipcode, String city,
