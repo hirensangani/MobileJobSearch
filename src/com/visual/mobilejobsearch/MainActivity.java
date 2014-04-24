@@ -66,6 +66,7 @@ public class MainActivity extends FragmentActivity {
 						
 						Log.e("apiKey", response.key);
 						
+						finish();						
 						Intent intent = new Intent(MainActivity.this, OpeningApplicationFragment.class);
 						 startActivity(intent);
 						

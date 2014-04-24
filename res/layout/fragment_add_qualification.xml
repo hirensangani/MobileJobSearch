@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F2F2F2" >
+    
+      <!-- Framelayout to display Fragments -->
+    
+   
 
     <TextView
         android:id="@+id/textViewNew"

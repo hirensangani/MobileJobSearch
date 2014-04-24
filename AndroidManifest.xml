@@ -46,14 +46,14 @@
          android:launchMode="singleInstance"    
              
          ></activity>   
-         
+         <!--  
           <activity 
          android:name="qualification.AddQualificationFragment"
          android:launchMode="singleInstance" 
          android:label="@string/activity_qualification"   
              
          ></activity> 
-            
+            -->
     </application>
 
 </manifest>

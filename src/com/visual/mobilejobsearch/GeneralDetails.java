@@ -17,6 +17,7 @@ import com.visual.mobilejobsearch.database.PostError;
 import com.visual.mobilejobsearch.database.api.APIAccess;
 import com.visual.mobilejobsearch.database.api.APIAccessFactory;
 import com.visual.mobilejobsearch.database.objects.Register;
+import com.visual.mobilejobsearch.persistent.Preferences;
 
 public class GeneralDetails extends FragmentActivity{
 	
@@ -42,10 +43,6 @@ public class GeneralDetails extends FragmentActivity{
 		signUpButton = (Button)findViewById(R.id.signUpButton);
 		signUpButton.setOnClickListener(onClickSignUp());
 		
-		//get the response of JSON
-		//api=APIAccessFactory.
-		
-		
 	}
 	
 	
@@ -66,6 +63,10 @@ public class GeneralDetails extends FragmentActivity{
 //				doPost.setNewPost(UserName,EmailAddress, Password, Name, vorName);
 //				Toast.makeText(getActivity(), "Registering the account",Toast.LENGTH_SHORT).show();
 				//new HttpAsyncTaskPost().execute("http://preparo.unter-guten-freunden.de/api/v1/register/");
+				
+				Preferences preferences = new Preferences(getApplicationContext());
+				preferences.putFirstName(vorEditText.getText().toString());
+				preferences.putLastName(nameEditText.getText().toString());
 				
 				api=APIAccessFactory.basicAuthInstance(UserName, Password, getApplicationContext());
 				api.getRequestQueue().add(api.newPostRegisterRequest(
