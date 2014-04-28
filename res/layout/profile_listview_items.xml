@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="8dp"
     android:background="#E7F1F3"
     >
  
- 
     <TextView
         android:id="@+id/lblListHeader"
-        android:layout_width="fill_parent"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="17dp"
-        android:textColor="@color/Black" />
+        android:textColor="@color/Black"
+        android:textSize="17dp" 
+        android:layout_marginRight="50dp"/>
+
+    <Button
+        android:id="@+id/addBtnQualification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lblListHeader"
+        android:layout_marginRight="29dp"
+        android:focusable="false"
+        android:background="@drawable/ic_add_plus" />
  
-</LinearLayout>
+</RelativeLayout>

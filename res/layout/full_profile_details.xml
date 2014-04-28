@@ -39,6 +39,7 @@
         android:orientation="horizontal" >
 
         <View
+            android:id="@+id/QsepLine"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="20dp"
@@ -82,16 +83,6 @@
         android:text="Where user lives"
         android:textSize="12dp" />
 
-    <Button
-        android:id="@+id/addQualification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/profileStatus"
-        android:layout_below="@+id/linearLayout1"
-        android:background="#F2F2F2"
-        android:drawableRight="@drawable/ic_add_plus" 
-        android:layout_marginRight="10dp"/>
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -101,12 +92,15 @@
         android:layout_alignLeft="@+id/profileView"
         android:text="@string/profile_qualification"
          android:textStyle="bold" />
+         
+          
     
     <LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:layout_below="@+id/textView1"
+    android:layout_marginTop="20dp"
      >
  
             <ExpandableListView
@@ -115,8 +109,14 @@
                 android:layout_width="match_parent"/>   
  
 </LinearLayout>
-    
- 
-     
+
+    <ImageButton
+        android:layout_margin="15dp"
+        android:id="@+id/addQualification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignRight="@+id/profileStatus"
+        android:layout_below="@+id/linearLayout1"
+        android:src="@drawable/ic_add_plus" />
 
 </RelativeLayout>

@@ -75,7 +75,9 @@
     
     
     <!-- for qualification -->
-    
     <string name="profile_qualification">Qualification</string>
- 
+    
+    <string-array name="profile_header_items">
+        <item>Abschluss</item>
+    </string-array>
 </resources>

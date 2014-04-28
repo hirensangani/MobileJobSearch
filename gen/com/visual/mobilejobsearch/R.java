@@ -16,6 +16,7 @@ public final class R {
         /**  Nav Drawer Menu Items 
          */
         public static final int nav_drawer_items=0x7f070000;
+        public static final int profile_header_items=0x7f070002;
     }
     public static final class attr {
     }
@@ -233,36 +234,38 @@ public final class R {
         public static final int QBis=0x7f0a000c;
         public static final int QDegreeName=0x7f0a0008;
         public static final int QVon=0x7f0a000b;
+        public static final int QsepLine=0x7f0a0017;
         public static final int TextViewBis=0x7f0a000a;
         public static final int TextViewNameInstitute=0x7f0a000d;
-        public static final int action_settings=0x7f0a002a;
-        public static final int addQualification=0x7f0a001a;
+        public static final int action_settings=0x7f0a002c;
+        public static final int addBtnQualification=0x7f0a0024;
+        public static final int addQualification=0x7f0a001c;
         public static final int counter=0x7f0a0006;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a0004;
         public static final int imgLogo=0x7f0a0003;
-        public static final int lblListHeader=0x7f0a0022;
-        public static final int lblListItem=0x7f0a0021;
+        public static final int lblListHeader=0x7f0a0023;
+        public static final int lblListItem=0x7f0a0022;
         public static final int linearLayout1=0x7f0a0016;
         public static final int list_slidermenu=0x7f0a0002;
-        public static final int loginButton=0x7f0a001f;
-        public static final int loginPassword=0x7f0a001e;
-        public static final int loginUserName=0x7f0a001d;
-        public static final int lvExp=0x7f0a001c;
-        public static final int profileCity=0x7f0a0019;
-        public static final int profileName=0x7f0a0017;
-        public static final int profileStatus=0x7f0a0018;
+        public static final int loginButton=0x7f0a0020;
+        public static final int loginPassword=0x7f0a001f;
+        public static final int loginUserName=0x7f0a001e;
+        public static final int lvExp=0x7f0a001d;
+        public static final int profileCity=0x7f0a001a;
+        public static final int profileName=0x7f0a0018;
+        public static final int profileStatus=0x7f0a0019;
         public static final int profileView=0x7f0a0014;
         public static final int profileViewText=0x7f0a0015;
-        public static final int registerAccount=0x7f0a0020;
-        public static final int signUpButton=0x7f0a0029;
-        public static final int signUpEmail=0x7f0a0026;
-        public static final int signUpFirstName=0x7f0a0024;
-        public static final int signUpName=0x7f0a0023;
-        public static final int signUpPassword=0x7f0a0027;
-        public static final int signUpPasswordAgain=0x7f0a0028;
-        public static final int signUpUsername=0x7f0a0025;
+        public static final int registerAccount=0x7f0a0021;
+        public static final int signUpButton=0x7f0a002b;
+        public static final int signUpEmail=0x7f0a0028;
+        public static final int signUpFirstName=0x7f0a0026;
+        public static final int signUpName=0x7f0a0025;
+        public static final int signUpPassword=0x7f0a0029;
+        public static final int signUpPasswordAgain=0x7f0a002a;
+        public static final int signUpUsername=0x7f0a0027;
         public static final int textView1=0x7f0a001b;
         public static final int textViewNew=0x7f0a0007;
         public static final int textViewVon=0x7f0a0009;
