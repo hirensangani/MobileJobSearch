@@ -11,8 +11,11 @@ import com.visual.mobilejobsearch.database.GsonPost;
 import com.visual.mobilejobsearch.database.calls.GetDegree;
 import com.visual.mobilejobsearch.database.calls.GetInstitute;
 import com.visual.mobilejobsearch.database.calls.GetLogin;
+import com.visual.mobilejobsearch.database.calls.GetQualification;
+import com.visual.mobilejobsearch.database.calls.PostQualification;
 import com.visual.mobilejobsearch.database.objects.Degree;
 import com.visual.mobilejobsearch.database.objects.Institute;
+import com.visual.mobilejobsearch.database.objects.Qualification;
 import com.visual.mobilejobsearch.database.objects.Register;
 
 public class APIAccess {
@@ -27,6 +30,7 @@ public class APIAccess {
 	private static final String GET_DEGREE_URL = API_URL + "degree/";
 	private static final String GET_COMPETENCETYPE_URL = API_URL + "competencetype/";
 	private static final String GET_COMPETENCE_URL = API_URL + "competence/";
+	private static final String GET_QUALIFICATION_URL = API_URL + "qualification/";
 	
 	// POST URLs
 	private static final String POST_REGISTER_URL = API_URL + "register/";
@@ -34,6 +38,7 @@ public class APIAccess {
 	private static final String POST_DEGREE_URL = API_URL + "degree/";
 	private static final String POST_COMPETENCETYPE_URL = API_URL + "competencetype/";
 	private static final String POST_COMPETENCE_URL = API_URL + "competence/";
+	private static final String POST_QUALIFICATION_URL = API_URL + "qualification/";
 	
 	private RequestQueue mRequestQueue;
 	private ImageLoader mImageLoader;
@@ -70,12 +75,22 @@ public class APIAccess {
 	
 	public GsonGet<GetDegree> newGetDegree(Listener<GetDegree> listener, ErrorListener errorListener){
 		return new GsonGet<GetDegree>(
-				GET_DEGREE_URL,
+				GET_DEGREE_URL + "?limit=100",
 				GetDegree.class,
 				listener,
 				errorListener
 				);
 	}
+	
+	public GsonGet <GetQualification> newGetQualification(Listener<GetQualification> listener, ErrorListener errorListener){
+		return new GsonGet<GetQualification>(
+				GET_QUALIFICATION_URL +"?limit=100",
+				GetQualification.class,
+				listener,
+				errorListener
+				);
+	}
+	
 	
 	//**********************//********************//*******************//*********************//******************//*****************//*********************//
 	
@@ -95,6 +110,25 @@ public class APIAccess {
 				errorListener
 				);
 	}
+	
+	
+	public GsonPost<Qualification> newPostQualification (String idDegree, String idInstitute, String begin, String end,
+			 Listener<Qualification> listener, APIErrorListener errorListener){
+		Qualification qualification = new Qualification();
+		qualification.degree = new Degree();
+		qualification.institute = new Institute();
+		qualification.degree.id = idDegree;
+		qualification.institute.id = idInstitute;
+		qualification.begin_of_education = begin;
+		qualification.end_of_education = end;
+		
+		return new GsonPost<Qualification>(
+				POST_QUALIFICATION_URL,
+				qualification,
+				Qualification.class,
+				listener,
+				errorListener);
+			}
 	
 	public GsonPost<Degree> newPostDegree (String name, Listener<Degree> listener, APIErrorListener errorListener){
 		
@@ -125,6 +159,8 @@ public class APIAccess {
 				listener,
 				errorListener);
 	}
+	
+	//public GsonPost <PostQualification> newPostQualification ()
 	
 	//**********************//********************//*******************//*********************//******************//*****************//*********************//
 	

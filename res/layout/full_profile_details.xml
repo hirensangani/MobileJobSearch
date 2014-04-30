@@ -83,6 +83,7 @@
         android:text="Where user lives"
         android:textSize="12dp" />
 
+ <!--  
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
         android:layout_alignBottom="@+id/addQualification"
         android:layout_alignLeft="@+id/profileView"
         android:text="@string/profile_qualification"
-         android:textStyle="bold" />
+         android:textStyle="bold" /> -->
          
           
     
@@ -99,7 +100,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:layout_below="@+id/textView1"
+    android:layout_below="@+id/linearLayout1"
     android:layout_marginTop="20dp"
      >
  
@@ -110,13 +111,13 @@
  
 </LinearLayout>
 
-    <ImageButton
+    <!-- <ImageButton
         android:layout_margin="15dp"
         android:id="@+id/addQualification"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignRight="@+id/profileStatus"
         android:layout_below="@+id/linearLayout1"
-        android:src="@drawable/ic_add_plus" />
+        android:src="@drawable/ic_add_plus" /> -->
 
 </RelativeLayout>

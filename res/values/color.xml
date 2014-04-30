@@ -2,8 +2,6 @@
 <resources>
   
      <color name="bluee">#60CEFD</color>
-     <color name="blue">#00f</color>
-     <color name="red">#f00</color>
  <color name="list_item_title">#fff</color>
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#992416</color>
@@ -14,7 +12,7 @@
  <color name="white">#FFFFFF</color>
  <color name="yellow">#FFFF00</color>
  <color name="fuchsia">#FF00FF</color>
- <color name="red">#FF0000</color>
+  <color name="red">#FF0000</color>
  <color name="silver">#C0C0C0</color>
  <color name="gray">#808080</color>
  <color name="olive">#808000</color>
@@ -24,7 +22,7 @@
  <color name="lime">#00FF00</color>
  <color name="teal">#008080</color>
  <color name="green">#008000</color>
- <color name="blue">#0000FF</color>
+  <color name="blue">#0000FF</color>
  <color name="navy">#000080</color>
  <color name="black">#000000</color>
 

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import Dialog.AddQualificationDialog;
+import Dialog.AddQualificationDialog.OnReturnListener;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -17,10 +17,13 @@ import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.visual.mobilejobsearch.R;
 import com.visual.mobilejobsearch.database.objects.APIObject;
 import com.visual.mobilejobsearch.database.objects.Degree;
+import com.visual.mobilejobsearch.database.objects.Institute;
+import com.visual.mobilejobsearch.database.objects.Qualification;
 
 public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 
@@ -29,7 +32,7 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	private HashMap<HeaderItem, List<APIObject>> _data;
 
 	public static enum HeaderItem {
-		DEGREE,
+		QUALIFICATION,
 	};
 
 	public ExpandableProfileListAdapter(Activity activity) {
@@ -43,9 +46,10 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosititon) {
 		HeaderItem key = HeaderItem.values()[groupPosition];
-		APIObject child = _data.get(key).get(childPosititon);
+		APIObject childDegree = _data.get(key).get(childPosititon);
+	//	Log.e("Child",String.valueOf(childPosititon));
 		
-		return child;
+		return childDegree;
 	}
 
 	@Override
@@ -60,26 +64,39 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.profile_list_item,
+			convertView = infalInflater.inflate(R.layout.child_item,
 					null);
-			
 
 		}
 		
 		APIObject child = (APIObject) getChild(groupPosition,
 				childPosition);
+		
 		HeaderItem group = (HeaderItem) getGroup(groupPosition);
 		
-		String headerString = "";
+		String headerString1 = "";
+		String headerString2 = "";
+		String headerString3 = "";
 		switch (group) {
-		case DEGREE:
-			headerString = ((Degree) child).name;
+		case QUALIFICATION:
+		headerString1 = ((Qualification)child).degree.name;
+			headerString2=((Qualification)child).institute.name;
+			headerString3=((Qualification)child).begin_of_education;
+			//Log.e("String1", headerString1);
 			break;
 		}
 		
-		TextView txtListChild = (TextView) convertView
-				.findViewById(R.id.lblListItem);
-		txtListChild.setText(headerString);
+		TextView txtListChild1 = (TextView) convertView
+				.findViewById(R.id.lblListItem1);
+		txtListChild1.setText(headerString1);
+		
+		TextView txtListChild2 = (TextView) convertView
+				.findViewById(R.id.lblListItem2);
+		txtListChild2.setText(headerString2);
+		
+		TextView txtListChild3 = (TextView) convertView
+				.findViewById(R.id.lblListItem3);
+		txtListChild3.setText(headerString3);
 
 		return convertView;
 	}
@@ -95,6 +112,7 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public Object getGroup(int groupPosition) {
 		HeaderItem key = HeaderItem.values()[groupPosition];
+	//	Log.e("Group", String.valueOf(groupPosition));
 		
 		return key;
 	}
@@ -119,7 +137,7 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			LayoutInflater infalInflater = (LayoutInflater) _activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(
-					R.layout.profile_listview_items, null);
+					R.layout.group_items, null);
 		}
 		
 		// get caption
@@ -152,6 +170,7 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 
 	public void addChild(HeaderItem header, APIObject child) {
 		_data.get(header).add(child);
+	//	Log.e("Values",String.valueOf(_data.values().size()));
 		
 		notifyDataSetChanged();
 	}
@@ -170,10 +189,25 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			
 //			Degree degree = null; // return value of dialog
 //			addChild(header, degree);
-			DialogFragment dialogFragment = new AddQualificationDialog();
+			AddQualificationDialog dialogFragment = new AddQualificationDialog();
+			dialogFragment.setOnReturnListener(new OnReturnListener() {
+				
+				@Override
+				public void onReturn(String degreeName, String instituteName, String time) {
+					Qualification qualification= new Qualification();
+					qualification.degree = new Degree();
+					qualification.institute = new Institute();
+					qualification.degree.name=degreeName;
+					qualification.institute.name=instituteName;
+					qualification.begin_of_education=time;
+				    addChild(HeaderItem.QUALIFICATION,qualification);
+					Toast.makeText(_activity, "hiii", Toast.LENGTH_SHORT).show();
+					
+				}
+			});
 			dialogFragment.show(_activity.getFragmentManager(), "GetDialog");
 			
-			Log.e("Adapter", "header=" + header);
+			//Log.e("Adapter", "header=" + header);
 			
 			
 		}
