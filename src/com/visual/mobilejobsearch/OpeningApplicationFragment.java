@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.visual.mobilejobsearch.persistent.Preferences;
 
@@ -283,6 +284,12 @@ protected void onDestroy() {
 	super.onDestroy();
 }
 
+//@Override
+//public void onBackPressed() {
+//	finish();
+//	Toast.makeText(getApplicationContext(), "onBackPressedOnapplicationFragment",Toast.LENGTH_SHORT).show();
+//	super.onBackPressed();
+//}
 		
 
 		}

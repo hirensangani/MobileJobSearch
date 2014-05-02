@@ -7,13 +7,14 @@ import java.util.List;
 import Dialog.AddQualificationDialog;
 import Dialog.AddQualificationDialog.OnReturnListener;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	private HashMap<HeaderItem, List<APIObject>> _data;
 
 	public static enum HeaderItem {
-		QUALIFICATION,
+		QUALIFICATION,COMPETENCE,EXPERIENCE,
 	};
 
 	public ExpandableProfileListAdapter(Activity activity) {
@@ -42,6 +43,8 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			_data.put(header, new ArrayList<APIObject>());
 		}
 	}
+	
+	
 
 	@Override
 	public Object getChild(int groupPosition, int childPosititon) {
@@ -64,10 +67,18 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.child_item,
-					null);
+			convertView = infalInflater.inflate(R.layout.child_item,parent,false);
 
 		}
+		
+		TextView txtListChild1 = (TextView) convertView.findViewById(R.id.lblListItem1);
+		TextView txtListChild2 = (TextView) convertView.findViewById(R.id.lblListItem2);
+		TextView txtListChild3 = (TextView) convertView.findViewById(R.id.lblListItem3);
+		
+//		if(convertView!=null){
+//			txtListChild1.setText("Hiiiiiiiiiiiii");
+//		}
+		
 		
 		APIObject child = (APIObject) getChild(groupPosition,
 				childPosition);
@@ -84,18 +95,19 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			headerString3=((Qualification)child).begin_of_education;
 			//Log.e("String1", headerString1);
 			break;
+		case COMPETENCE:
+			break;
+		case EXPERIENCE:
+			break;
 		}
 		
-		TextView txtListChild1 = (TextView) convertView
-				.findViewById(R.id.lblListItem1);
+	
 		txtListChild1.setText(headerString1);
 		
-		TextView txtListChild2 = (TextView) convertView
-				.findViewById(R.id.lblListItem2);
+		
 		txtListChild2.setText(headerString2);
 		
-		TextView txtListChild3 = (TextView) convertView
-				.findViewById(R.id.lblListItem3);
+		
 		txtListChild3.setText(headerString3);
 
 		return convertView;
@@ -139,9 +151,11 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			convertView = infalInflater.inflate(
 					R.layout.group_items, null);
 		}
-		
+		Button addButtonQualification = (Button) convertView.findViewById(R.id.addBtnQualification);
 		// get caption
 		String groupString = _activity.getResources().getStringArray(R.array.profile_header_items)[groupPosition];
+		
+		
 		
 		// set caption
 		TextView lblListHeader = (TextView) convertView
@@ -150,8 +164,17 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		lblListHeader.setText(groupString);
 	
 		// add listener to add button
-		Button addButton = (Button) convertView.findViewById(R.id.addBtnQualification);
-		addButton.setOnClickListener(new ButtonListener((HeaderItem)getGroup(groupPosition)));
+		
+		
+		if(groupPosition==0){
+			
+			addButtonQualification.setOnClickListener(new ButtonListenerQualification((HeaderItem)getGroup(groupPosition)));
+		}
+		if(groupPosition==1){
+		//	Button addButtonCompetence = (Button) convertView.findViewById(R.id.addBtnQualification);
+			addButtonQualification.setOnClickListener(new ButtonListenerCompetence((HeaderItem)getGroup(groupPosition)));
+		}
+		
 		
 		return convertView;
 	}
@@ -176,10 +199,10 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	}
 	
 	
-	private class ButtonListener implements OnClickListener {
+	private class ButtonListenerQualification implements OnClickListener {
 		private HeaderItem header;
 		
-		public ButtonListener(HeaderItem header) {
+		public ButtonListenerQualification(HeaderItem header) {
 			this.header = header;
 		}
 		
@@ -193,21 +216,43 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			dialogFragment.setOnReturnListener(new OnReturnListener() {
 				
 				@Override
-				public void onReturn(String degreeName, String instituteName, String time) {
+				public void onReturn(String degreeName, String instituteName, String timeVon, String timeBis) {
 					Qualification qualification= new Qualification();
 					qualification.degree = new Degree();
 					qualification.institute = new Institute();
 					qualification.degree.name=degreeName;
 					qualification.institute.name=instituteName;
-					qualification.begin_of_education=time;
+					qualification.begin_of_education=timeVon;
+					qualification.end_of_education=timeBis;
 				    addChild(HeaderItem.QUALIFICATION,qualification);
-					Toast.makeText(_activity, "hiii", Toast.LENGTH_SHORT).show();
+					Toast.makeText(_activity, "Qualification has been added", Toast.LENGTH_SHORT).show();
 					
 				}
 			});
-			dialogFragment.show(_activity.getFragmentManager(), "GetDialog");
+			dialogFragment.show(_activity.getFragmentManager(), "GetDialog_Qualification");
 			
 			//Log.e("Adapter", "header=" + header);
+			
+			
+		}
+	}
+	
+	
+	private class ButtonListenerCompetence implements OnClickListener {
+		private HeaderItem header;
+		private Dialog ratingDialog;
+		
+		public ButtonListenerCompetence(HeaderItem header) {
+			this.header = header;
+		}
+		
+		@Override
+		public void onClick(View v) {
+			// launch dialog and pass header
+			AddCompetenceDialog dialogFragment = new AddCompetenceDialog();
+			dialogFragment.show(_activity.getFragmentManager(), "GetDialog_Competence");
+			
+           Toast.makeText(_activity, "I did it", Toast.LENGTH_SHORT).show();
 			
 			
 		}

@@ -3,15 +3,12 @@ package Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.android.volley.Response.Listener;
@@ -25,14 +22,10 @@ import com.visual.mobilejobsearch.database.objects.Institute;
 import com.visual.mobilejobsearch.database.objects.Qualification;
 import com.visual.mobilejobsearch.persistent.Preferences;
 
-public class AddQualificationDialog extends DialogFragment implements OnEditorActionListener{
+public class AddQualificationDialog extends DialogFragment {
 	
 
-	@Override
-	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	
 	EditText degreeName, von, bis, institutName, street, zipcode, city;
 	Button save;
@@ -45,7 +38,7 @@ public class AddQualificationDialog extends DialogFragment implements OnEditorAc
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_add_qualification, container, false);
+		View view = inflater.inflate(R.layout.dialog_add_qualification, container, false);
 		
         Toast.makeText(getActivity(), "Add the new qualification", Toast.LENGTH_SHORT).show();
         
@@ -127,8 +120,8 @@ public class AddQualificationDialog extends DialogFragment implements OnEditorAc
 				}));
 				
 				api.getRequestQueue().add(api.newPostQualification(
-						"94",
-						"90",
+						idDegree,
+						idInstitute,
 						von.getText().toString(),
 						bis.getText().toString(),
 						new Listener<Qualification>() {
@@ -153,9 +146,12 @@ public class AddQualificationDialog extends DialogFragment implements OnEditorAc
 	}
 	
 public void updateListView(){
-	mOnReturnListener.onReturn(degreeName.getText().toString(),
+	mOnReturnListener.onReturn(
+			                   degreeName.getText().toString(),
 			                   institutName.getText().toString(),
-			                   von.getText().toString());
+			                   von.getText().toString(),
+			                   bis.getText().toString()
+			                   );
 		dismiss();
 }
 
@@ -164,6 +160,6 @@ public void setOnReturnListener(OnReturnListener onReturnListener) {
 }
 
 public interface OnReturnListener {
-	public void onReturn(String degreeName, String instituteName, String time);
+	public void onReturn(String degreeName, String instituteName, String timeVon, String timeBis);
 }
 }

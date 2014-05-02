@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 public class SplashScreen extends Activity {
 	 
@@ -46,5 +47,26 @@ public class SplashScreen extends Activity {
             }
         }, SPLASH_TIME_OUT);
     }
+    
+//    @Override
+//    protected void onDestroy() {
+//    	// TODO Auto-generated method stub
+//    	finish();
+//    	super.onDestroy();
+//    }
+//    
+//    @Override
+//    public void onDetachedFromWindow() {
+//    	Toast.makeText(getApplicationContext(), "onDeatache", Toast.LENGTH_SHORT).show();    	// TODO Auto-generated method stub
+//    	finish();
+//    	super.onDetachedFromWindow();
+//    }
+//    
+//    @Override
+//    public void onBackPressed() {
+//    	// TODO Auto-generated method stub
+//    	Toast.makeText(getApplicationContext(), "onBackPressed", Toast.LENGTH_SHORT).show();
+//    	super.onBackPressed();
+//    }
  
 }

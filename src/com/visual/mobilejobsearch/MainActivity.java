@@ -126,5 +126,12 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		finish();
+		super.onDestroy();
+	}
 
 }

@@ -1,6 +1,8 @@
 package com.visual.mobilejobsearch.database.api;
 
 
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -8,11 +10,14 @@ import com.android.volley.toolbox.ImageLoader;
 import com.visual.mobilejobsearch.database.APIErrorListener;
 import com.visual.mobilejobsearch.database.GsonGet;
 import com.visual.mobilejobsearch.database.GsonPost;
+import com.visual.mobilejobsearch.database.calls.GetCompetence;
+import com.visual.mobilejobsearch.database.calls.GetCompetenceType;
 import com.visual.mobilejobsearch.database.calls.GetDegree;
 import com.visual.mobilejobsearch.database.calls.GetInstitute;
 import com.visual.mobilejobsearch.database.calls.GetLogin;
 import com.visual.mobilejobsearch.database.calls.GetQualification;
-import com.visual.mobilejobsearch.database.calls.PostQualification;
+import com.visual.mobilejobsearch.database.objects.Competence;
+import com.visual.mobilejobsearch.database.objects.CompetenceType;
 import com.visual.mobilejobsearch.database.objects.Degree;
 import com.visual.mobilejobsearch.database.objects.Institute;
 import com.visual.mobilejobsearch.database.objects.Qualification;
@@ -91,6 +96,22 @@ public class APIAccess {
 				);
 	}
 	
+	public GsonGet<GetCompetenceType> newGetCompetenceType(Listener<GetCompetenceType> listener, ErrorListener errorListener){
+		return new GsonGet<GetCompetenceType>(
+				GET_COMPETENCETYPE_URL,
+				GetCompetenceType.class,
+				listener,
+				errorListener);
+	}
+	
+	public GsonGet<GetCompetence> newGetCompetence(Listener<GetCompetence> listener, ErrorListener errorListener){
+		return new GsonGet<GetCompetence>(
+				GET_COMPETENCE_URL,
+				GetCompetence.class,
+				listener,
+				errorListener);
+	}
+	
 	
 	//**********************//********************//*******************//*********************//******************//*****************//*********************//
 	
@@ -160,6 +181,36 @@ public class APIAccess {
 				errorListener);
 	}
 	
+	public GsonPost<CompetenceType> newPostCompetenceType(String name,Listener<CompetenceType> listener, APIErrorListener errorListener){
+		
+		CompetenceType competenceType = new CompetenceType();
+		competenceType.name= name;
+		
+		return new GsonPost<CompetenceType>(
+				POST_COMPETENCETYPE_URL,
+				competenceType,
+				CompetenceType.class,
+				listener,
+				errorListener);
+		
+	}
+	
+	public GsonPost<Competence> newPostCompetence(String idCompetenceType, float rating, Listener<Competence> listener, APIErrorListener errorListener){
+		
+		Competence competence = new Competence();
+		competence.type = new CompetenceType();
+		competence.type.id = idCompetenceType;
+		competence.rating = rating;
+		
+		return new GsonPost<Competence>(
+				POST_COMPETENCE_URL,
+				competence,
+				Competence.class,
+				listener,
+				errorListener);
+	}
+	
+
 	//public GsonPost <PostQualification> newPostQualification ()
 	
 	//**********************//********************//*******************//*********************//******************//*****************//*********************//

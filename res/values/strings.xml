@@ -26,6 +26,8 @@
     <string name="activity_qualification">Qualification</string>
     <string name="activity_signup">Signup</string>
 <string name="or">or</string> 
+<string name="ok">Ok</string> 
+<string name="cancel">Cancel</string> 
 
 <string name="save">Save</string> 
 
@@ -78,6 +80,8 @@
     <string name="profile_qualification">Qualification</string>
     
     <string-array name="profile_header_items">
-        <item>Abschluss</item>
+        <item>Qualification</item>
+         <item>Competence</item>
+         <item>Experience</item>
     </string-array>
 </resources>
