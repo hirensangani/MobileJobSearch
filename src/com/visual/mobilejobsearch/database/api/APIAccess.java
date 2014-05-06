@@ -201,6 +201,7 @@ public class APIAccess {
 		competence.type = new CompetenceType();
 		competence.type.id = idCompetenceType;
 		competence.rating = rating;
+		Log.e("GsonPost", idCompetenceType);
 		
 		return new GsonPost<Competence>(
 				POST_COMPETENCE_URL,

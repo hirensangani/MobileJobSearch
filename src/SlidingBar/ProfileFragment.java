@@ -4,14 +4,15 @@ import qualification.ExpandableProfileListAdapter;
 import qualification.ExpandableProfileListAdapter.HeaderItem;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -19,11 +20,12 @@ import com.android.volley.VolleyError;
 import com.visual.mobilejobsearch.R;
 import com.visual.mobilejobsearch.database.api.APIAccess;
 import com.visual.mobilejobsearch.database.api.APIAccessFactory;
+import com.visual.mobilejobsearch.database.calls.GetCompetence;
+import com.visual.mobilejobsearch.database.calls.GetCompetenceType;
 import com.visual.mobilejobsearch.database.calls.GetDegree;
 import com.visual.mobilejobsearch.database.calls.GetInstitute;
 import com.visual.mobilejobsearch.database.calls.GetQualification;
-import com.visual.mobilejobsearch.database.objects.Degree;
-import com.visual.mobilejobsearch.database.objects.Institute;
+import com.visual.mobilejobsearch.database.objects.Competence;
 import com.visual.mobilejobsearch.database.objects.Qualification;
 import com.visual.mobilejobsearch.persistent.Preferences;
 
@@ -80,9 +82,9 @@ public class ProfileFragment extends Fragment {
 
 			@Override
 			public void onResponse(GetInstitute response) {
-				for(Institute institute : response.objects){
-					//listAdapter.addChild(HeaderItem.DEGREE,institute);
-				}
+//				for(Institute institute : response.objects){
+//					//listAdapter.addChild(HeaderItem.DEGREE,institute);
+//				}
 				
 			}
 		}, 
@@ -101,9 +103,9 @@ public class ProfileFragment extends Fragment {
 			@Override
 			public void onResponse(GetDegree response) {
 				
-				for(Degree degree : response.objects){
-				//	listAdapter.addChild(HeaderItem.QUALIFICATION,degree);
-				}
+//				for(Degree degree : response.objects){
+//				//	listAdapter.addChild(HeaderItem.QUALIFICATION,degree);
+//				}
 				
 
 			}
@@ -137,9 +139,61 @@ public class ProfileFragment extends Fragment {
 			}
 		}));
 		
+		//get request for Competence
+		
+		api.getRequestQueue().add(api.newGetCompetenceType(new Listener<GetCompetenceType>() {
+
+			@Override
+			public void onResponse(GetCompetenceType response) {
+				// TODO Auto-generated method stub
+				
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				
+			}
+		}));
+		
+		api.getRequestQueue().add(api.newGetCompetence(new Listener<GetCompetence>() {
+
+			@Override
+			public void onResponse(GetCompetence response) {
+				
+				for (Competence competence : response.objects){
+					listAdapter.addChild(HeaderItem.COMPETENCE, competence);
+				}
+				
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				
+			}
+		}));
 		
 		
 		 expListView.setAdapter(listAdapter);
+		 
+		 expListView.setOnChildClickListener(new OnChildClickListener() {
+			 
+			
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				
+//				final String selected = (String) listAdapter.getChild(
+//						groupPosition, childPosition);
+//				Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+				return true;
+			}
+		});
+		 
+		 
          
         return rootView;
     }

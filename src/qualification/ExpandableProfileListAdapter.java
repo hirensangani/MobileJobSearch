@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import qualification.AddCompetenceDialog.OnReturnListenerCompetence;
+
 import Dialog.AddQualificationDialog;
 import Dialog.AddQualificationDialog.OnReturnListener;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.text.GetChars;
+import android.text.style.BulletSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +23,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.visual.mobilejobsearch.R;
 import com.visual.mobilejobsearch.database.objects.APIObject;
+import com.visual.mobilejobsearch.database.objects.Competence;
+import com.visual.mobilejobsearch.database.objects.CompetenceType;
 import com.visual.mobilejobsearch.database.objects.Degree;
 import com.visual.mobilejobsearch.database.objects.Institute;
 import com.visual.mobilejobsearch.database.objects.Qualification;
@@ -47,10 +57,9 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	
 
 	@Override
-	public Object getChild(int groupPosition, int childPosititon) {
+	public Object getChild(int groupPosition,final int childPosititon) {
 		HeaderItem key = HeaderItem.values()[groupPosition];
 		APIObject childDegree = _data.get(key).get(childPosititon);
-	//	Log.e("Child",String.valueOf(childPosititon));
 		
 		return childDegree;
 	}
@@ -61,54 +70,99 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, final int childPosition,
+	public View getChildView(int groupPosition,  final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
-		if (convertView == null) {
+		
 			LayoutInflater infalInflater = (LayoutInflater) this._activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.child_item,parent,false);
-
-		}
-		
-		TextView txtListChild1 = (TextView) convertView.findViewById(R.id.lblListItem1);
-		TextView txtListChild2 = (TextView) convertView.findViewById(R.id.lblListItem2);
-		TextView txtListChild3 = (TextView) convertView.findViewById(R.id.lblListItem3);
-		
-//		if(convertView!=null){
-//			txtListChild1.setText("Hiiiiiiiiiiiii");
-//		}
-		
+			
 		
 		APIObject child = (APIObject) getChild(groupPosition,
 				childPosition);
 		
 		HeaderItem group = (HeaderItem) getGroup(groupPosition);
 		
-		String headerString1 = "";
-		String headerString2 = "";
-		String headerString3 = "";
+		String headerStringDegreeName = "";
+		String headerStringInstituteName = "";
+		String headerStringTime = "";
+		String headerStringCompetenceName = "";
+		float ratingCompetence = 0;
 		switch (group) {
 		case QUALIFICATION:
-		headerString1 = ((Qualification)child).degree.name;
-			headerString2=((Qualification)child).institute.name;
-			headerString3=((Qualification)child).begin_of_education;
-			//Log.e("String1", headerString1);
+			convertView = infalInflater.inflate(R.layout.child_item_qualification,parent,false);
+			TextView txtListChild1 = (TextView) convertView.findViewById(R.id.lblListItem1);
+			TextView txtListChild2 = (TextView) convertView.findViewById(R.id.lblListItem2);
+			TextView txtListChild3 = (TextView) convertView.findViewById(R.id.lblListItem3);
+		    headerStringDegreeName = ((Qualification)child).degree.name;
+			headerStringInstituteName=((Qualification)child).institute.name;
+			headerStringTime=((Qualification)child).begin_of_education +" to "+ ((Qualification)child).end_of_education;
+			
+			txtListChild1.setText(headerStringDegreeName);
+			
+			
+			txtListChild2.setText(headerStringInstituteName);
+			
+			
+			txtListChild3.setText(headerStringTime);
+			
 			break;
 		case COMPETENCE:
+			convertView = infalInflater.inflate(R.layout.child_item_competence,parent,false);
+			
+			ImageView deleteImageView = (ImageView)convertView.findViewById(R.id.deleteCompetence);
+			
+			//deleteImageView.setOnClickListener(new DeleteButtonCompetenceListener((APIObject)getChild(0, childPosition)));
+			
+			deleteImageView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				
+					AlertDialog.Builder builder = new AlertDialog.Builder(_activity);
+					builder.setMessage("Do you want to remove?");
+					builder.setCancelable(false);
+					builder.setPositiveButton("Yes", 
+							                   new DialogInterface.OnClickListener() {
+												
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													
+													_data.remove(childPosition);
+													notifyDataSetChanged();
+													
+												}
+											});
+					builder.setNegativeButton("No",
+							                  new DialogInterface.OnClickListener() {
+												
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+												
+													dialog.cancel();
+													
+												}
+											});
+					
+				}
+			});
+			
+			//delete experiment
+			
+			TextView textView = (TextView)convertView.findViewById(R.id.textViewCompetence);
+			RatingBar bar = (RatingBar)convertView.findViewById(R.id.ratingBarCompetence);
+			
+			headerStringCompetenceName = ((Competence)child).type.name;
+			ratingCompetence = ((Competence)child).rating;
+			textView.setText(headerStringCompetenceName);
+			bar.setRating(ratingCompetence);
 			break;
 		case EXPERIENCE:
 			break;
 		}
 		
 	
-		txtListChild1.setText(headerString1);
 		
-		
-		txtListChild2.setText(headerString2);
-		
-		
-		txtListChild3.setText(headerString3);
 
 		return convertView;
 	}
@@ -124,7 +178,6 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public Object getGroup(int groupPosition) {
 		HeaderItem key = HeaderItem.values()[groupPosition];
-	//	Log.e("Group", String.valueOf(groupPosition));
 		
 		return key;
 	}
@@ -171,7 +224,6 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			addButtonQualification.setOnClickListener(new ButtonListenerQualification((HeaderItem)getGroup(groupPosition)));
 		}
 		if(groupPosition==1){
-		//	Button addButtonCompetence = (Button) convertView.findViewById(R.id.addBtnQualification);
 			addButtonQualification.setOnClickListener(new ButtonListenerCompetence((HeaderItem)getGroup(groupPosition)));
 		}
 		
@@ -198,6 +250,8 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 	
+	
+
 	
 	private class ButtonListenerQualification implements OnClickListener {
 		private HeaderItem header;
@@ -250,11 +304,67 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		public void onClick(View v) {
 			// launch dialog and pass header
 			AddCompetenceDialog dialogFragment = new AddCompetenceDialog();
+			dialogFragment.setOnReturnListener(new OnReturnListenerCompetence(){
+
+				@Override
+				public void onReturn(String competenceType, float ratingValue) {
+					Competence competence = new Competence();
+					competence.type = new CompetenceType();
+					competence.type.name = competenceType;
+					competence.rating = ratingValue;
+					 addChild(HeaderItem.COMPETENCE,competence);
+					  Toast.makeText(_activity, "Competence has been updated", Toast.LENGTH_SHORT).show();
+				}
+				
+			});
+			
 			dialogFragment.show(_activity.getFragmentManager(), "GetDialog_Competence");
 			
-           Toast.makeText(_activity, "I did it", Toast.LENGTH_SHORT).show();
+         
 			
 			
 		}
 	}
+	
+	
+//	private class DeleteButtonCompetenceListener implements OnClickListener{
+//		
+//		private APIObject apiObject;
+//		
+//		public DeleteButtonCompetenceListener(APIObject object){
+//			this.apiObject=object;
+//		}
+//
+//		@Override
+//		public void onClick(View v) {
+//		
+//			AlertDialog.Builder builder = new AlertDialog.Builder(_activity);
+//			builder.setMessage("Do you want to remove?");
+//			builder.setCancelable(false);
+//			builder.setPositiveButton("Yes", 
+//					                   new DialogInterface.OnClickListener() {
+//										
+//										@Override
+//										public void onClick(DialogInterface dialog, int which) {
+//											
+//											_data.remove(HeaderItem.COMPETENCE);
+//											notifyDataSetChanged();
+//											
+//										}
+//									});
+//			builder.setNegativeButton("No",
+//					                  new DialogInterface.OnClickListener() {
+//										
+//										@Override
+//										public void onClick(DialogInterface dialog, int which) {
+//										
+//											dialog.cancel();
+//											
+//										}
+//									});
+//			
+//		}
+//		
+//	}
+	
 }
