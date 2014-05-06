@@ -32,6 +32,18 @@
 <string name="save">Save</string> 
 
  
+<!-- For competence dialog --> 
+<string name="yes">Yes</string> 
+<string name="no">No</string>
+<string name="sure">Do you want to remove it?</string>
+<string name="titleCompetence">Delete Competence</string>   
+<!-- For competence dialog --> 
+
+<!-- For Qualification dialog --> 
+<string name="titleQualification">Delete Qualification</string>   
+<!-- For competence dialog --> 
+
+
  <string name="newPosition">Neue Qaulification hinzufügen</string>
  <string name="newInstitute">Institute</string>
  <string name="newCity">City</string>

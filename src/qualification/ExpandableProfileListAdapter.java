@@ -110,45 +110,6 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		case COMPETENCE:
 			convertView = infalInflater.inflate(R.layout.child_item_competence,parent,false);
 			
-			ImageView deleteImageView = (ImageView)convertView.findViewById(R.id.deleteCompetence);
-			
-			//deleteImageView.setOnClickListener(new DeleteButtonCompetenceListener((APIObject)getChild(0, childPosition)));
-			
-			deleteImageView.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-				
-					AlertDialog.Builder builder = new AlertDialog.Builder(_activity);
-					builder.setMessage("Do you want to remove?");
-					builder.setCancelable(false);
-					builder.setPositiveButton("Yes", 
-							                   new DialogInterface.OnClickListener() {
-												
-												@Override
-												public void onClick(DialogInterface dialog, int which) {
-													
-													_data.remove(childPosition);
-													notifyDataSetChanged();
-													
-												}
-											});
-					builder.setNegativeButton("No",
-							                  new DialogInterface.OnClickListener() {
-												
-												@Override
-												public void onClick(DialogInterface dialog, int which) {
-												
-													dialog.cancel();
-													
-												}
-											});
-					
-				}
-			});
-			
-			//delete experiment
-			
 			TextView textView = (TextView)convertView.findViewById(R.id.textViewCompetence);
 			RatingBar bar = (RatingBar)convertView.findViewById(R.id.ratingBarCompetence);
 			
@@ -250,6 +211,12 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 	
+	public void deleteChild(final HeaderItem header, APIObject child){
+		
+		_data.get(header).remove(child);
+		notifyDataSetChanged();
+	}
+	
 	
 
 	
@@ -319,52 +286,6 @@ public class ExpandableProfileListAdapter extends BaseExpandableListAdapter {
 			});
 			
 			dialogFragment.show(_activity.getFragmentManager(), "GetDialog_Competence");
-			
-         
-			
-			
 		}
 	}
-	
-	
-//	private class DeleteButtonCompetenceListener implements OnClickListener{
-//		
-//		private APIObject apiObject;
-//		
-//		public DeleteButtonCompetenceListener(APIObject object){
-//			this.apiObject=object;
-//		}
-//
-//		@Override
-//		public void onClick(View v) {
-//		
-//			AlertDialog.Builder builder = new AlertDialog.Builder(_activity);
-//			builder.setMessage("Do you want to remove?");
-//			builder.setCancelable(false);
-//			builder.setPositiveButton("Yes", 
-//					                   new DialogInterface.OnClickListener() {
-//										
-//										@Override
-//										public void onClick(DialogInterface dialog, int which) {
-//											
-//											_data.remove(HeaderItem.COMPETENCE);
-//											notifyDataSetChanged();
-//											
-//										}
-//									});
-//			builder.setNegativeButton("No",
-//					                  new DialogInterface.OnClickListener() {
-//										
-//										@Override
-//										public void onClick(DialogInterface dialog, int which) {
-//										
-//											dialog.cancel();
-//											
-//										}
-//									});
-//			
-//		}
-//		
-//	}
-	
 }

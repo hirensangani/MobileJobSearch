@@ -24,12 +24,12 @@
         android:layout_marginLeft="5dp"
         />
 
-    <ImageView
+    <!-- <ImageView
         android:id="@+id/deleteCompetence"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginTop="3dp"
         android:layout_marginRight="5dp"
-        android:src="@drawable/ic_delete" />
+        android:src="@drawable/ic_delete" /> -->
 
 </LinearLayout>

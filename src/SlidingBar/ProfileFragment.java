@@ -2,17 +2,18 @@ package SlidingBar;
 
 import qualification.ExpandableProfileListAdapter;
 import qualification.ExpandableProfileListAdapter.HeaderItem;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -25,6 +26,7 @@ import com.visual.mobilejobsearch.database.calls.GetCompetenceType;
 import com.visual.mobilejobsearch.database.calls.GetDegree;
 import com.visual.mobilejobsearch.database.calls.GetInstitute;
 import com.visual.mobilejobsearch.database.calls.GetQualification;
+import com.visual.mobilejobsearch.database.objects.APIObject;
 import com.visual.mobilejobsearch.database.objects.Competence;
 import com.visual.mobilejobsearch.database.objects.Qualification;
 import com.visual.mobilejobsearch.persistent.Preferences;
@@ -125,6 +127,7 @@ public class ProfileFragment extends Fragment {
 			public void onResponse(GetQualification response) {
 				
 				for(Qualification qualification:response.objects){
+					//Log.e("Error",String.valueOf(qualification.id));
 					listAdapter.addChild(HeaderItem.QUALIFICATION, qualification);
 				}
 				
@@ -145,14 +148,12 @@ public class ProfileFragment extends Fragment {
 
 			@Override
 			public void onResponse(GetCompetenceType response) {
-				// TODO Auto-generated method stub
 				
 			}
 		}, new ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				// TODO Auto-generated method stub
 				
 			}
 		}));
@@ -176,7 +177,6 @@ public class ProfileFragment extends Fragment {
 			}
 		}));
 		
-		
 		 expListView.setAdapter(listAdapter);
 		 
 		 expListView.setOnChildClickListener(new OnChildClickListener() {
@@ -184,20 +184,130 @@ public class ProfileFragment extends Fragment {
 			
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-					int groupPosition, int childPosition, long id) {
+					final int groupPosition,  final int childPosition, long id) {
 				
-//				final String selected = (String) listAdapter.getChild(
-//						groupPosition, childPosition);
-//				Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+				
+				HeaderItem group = (HeaderItem) listAdapter.getGroup(groupPosition);
+				switch(group){
+				
+				case QUALIFICATION:
+					
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+							getActivity());
+			 
+						// set title
+						alertDialogBuilder.setTitle(R.string.titleQualification);
+			 
+						// set dialog message
+						alertDialogBuilder
+							.setMessage(R.string.sure)
+							.setCancelable(false)
+							.setPositiveButton(R.string.yes,
+									new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,int id) {
+									//Qualification qualification = new Qualification();
+									
+									Qualification qObject = (Qualification) listAdapter.getChild(groupPosition, childPosition);
+									
+									//delete request
+									api.getRequestQueue().add(api.newDeleteQualification(
+											qObject.id,
+											new Listener<Qualification>() {
+
+												@Override
+												public void onResponse(Qualification response) {
+													
+												}
+											}, new ErrorListener() {
+
+												@Override
+												public void onErrorResponse(VolleyError error) {
+													Log.e("onErrorResponse", "Delete Qualification Error");													
+												}
+											}))	;								
+									//
+									
+									APIObject object;
+								    object=(APIObject)listAdapter.getChild(groupPosition, childPosition);
+								    
+									listAdapter.deleteChild(HeaderItem.QUALIFICATION,object);
+									
+								}
+							  })
+							.setNegativeButton(R.string.no,
+									new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,int id) {
+									// if this button is clicked, just close
+									// the dialog box and do nothing
+									dialog.cancel();
+								}
+							})
+							.create().show();
+					
+					break;
+					
+				case COMPETENCE:
+				
+				AlertDialog.Builder alertDialogBuilderCompetence = new AlertDialog.Builder(
+						getActivity());
+		 
+					// set title
+					alertDialogBuilderCompetence.setTitle(R.string.titleCompetence);
+		 
+					// set dialog message
+					alertDialogBuilderCompetence
+						.setMessage(R.string.sure)
+						.setCancelable(false)
+						.setPositiveButton(R.string.yes,
+								new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								
+								Competence cObject = (Competence) listAdapter.getChild(groupPosition, childPosition);
+								api.getRequestQueue().add(api.newDeleteCompetence(cObject.id,
+										new Listener<Competence>() {
+
+											@Override
+											public void onResponse(Competence response) {
+												// TODO Auto-generated method stub
+												
+											}
+										}, new ErrorListener() {
+
+											@Override
+											public void onErrorResponse(VolleyError error) {
+												Log.e("onErrorResponse", "Delete Competence Error");		
+												
+											}
+										}));
+								
+								APIObject object;
+							    object=(APIObject)listAdapter.getChild(groupPosition, childPosition);
+								listAdapter.deleteChild(HeaderItem.COMPETENCE,object);
+								
+							}
+						  })
+						.setNegativeButton(R.string.no,
+								new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// if this button is clicked, just close
+								// the dialog box and do nothing
+								dialog.cancel();
+							}
+						})
+						.create().show();
+					break;
+					
+				case EXPERIENCE:
+					break;
+				}		
+		 
+
 				return true;
 			}
 		});
 		 
-		 
-         
+		         
         return rootView;
     }
-
-	
     
 }

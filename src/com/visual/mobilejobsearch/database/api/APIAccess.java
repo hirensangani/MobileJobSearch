@@ -8,6 +8,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.ImageLoader;
 import com.visual.mobilejobsearch.database.APIErrorListener;
+import com.visual.mobilejobsearch.database.GsonDelete;
 import com.visual.mobilejobsearch.database.GsonGet;
 import com.visual.mobilejobsearch.database.GsonPost;
 import com.visual.mobilejobsearch.database.calls.GetCompetence;
@@ -28,6 +29,7 @@ public class APIAccess {
 	public static final String MAIN_URL = "http://preparo.unter-guten-freunden.de/";
 	private static final String API_URL = MAIN_URL + "api/v1/";
 	private static final String IMAGE_URL = MAIN_URL + "media/";
+	private static final String SLASH = "/";
 	
 	// GET URLs
 	private static final String GET_LOGIN_URL = API_URL + "token/auth/";
@@ -213,6 +215,23 @@ public class APIAccess {
 	
 
 	//public GsonPost <PostQualification> newPostQualification ()
+	
+	//**********************//********************//*******************//*********************//******************//*****************//*********************//
+	public GsonDelete<Qualification> newDeleteQualification(int id, Listener<Qualification> listener, ErrorListener errorListener){
+		return new GsonDelete<Qualification>(
+				 GET_QUALIFICATION_URL+ String.valueOf(id) + SLASH,
+				 Qualification.class,
+				 listener,
+				 errorListener);
+	}
+	
+	public GsonDelete<Competence> newDeleteCompetence(String id, Listener<Competence> listener, ErrorListener errorListener){
+		return new GsonDelete<Competence>(
+				GET_COMPETENCE_URL + id + SLASH, 
+				Competence.class,
+				listener,
+				errorListener);
+	}
 	
 	//**********************//********************//*******************//*********************//******************//*****************//*********************//
 	
