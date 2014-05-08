@@ -30,18 +30,23 @@
 <string name="cancel">Cancel</string> 
 
 <string name="save">Save</string> 
-
+<string name="edit">Edit</string> 
+<string name="doneSignUp">Congratulation!! You have successfully signup. Please Login. </string>
+<string name="errorSignUp">Error occured. Please fill up the details again. </string>
+<string name="errorSignUpPassword">Password does not match</string>
  
 <!-- For competence dialog --> 
 <string name="yes">Yes</string> 
 <string name="no">No</string>
-<string name="sure">Do you want to remove it?</string>
+<string name="sure">Do you want to remove this?</string>
 <string name="titleCompetence">Delete Competence</string>   
 <!-- For competence dialog --> 
 
 <!-- For Qualification dialog --> 
 <string name="titleQualification">Delete Qualification</string>   
 <!-- For competence dialog --> 
+
+<string name="toastQualification">Please enter the valid data</string>  
 
 
  <string name="newPosition">Neue Qaulification hinzufügen</string>
@@ -75,7 +80,7 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
       <item >@drawable/ic_home</item>
-        <item>@drawable/ic_profile</item>
+        <item>@drawable/ic_people</item>
         <item>@drawable/ic_navigator</item>
         <item>@drawable/ic_theme</item>
         <item>@drawable/ic_scanner</item>

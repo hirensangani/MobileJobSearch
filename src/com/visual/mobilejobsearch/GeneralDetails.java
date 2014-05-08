@@ -3,8 +3,9 @@ package com.visual.mobilejobsearch;
 
 
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,13 +18,11 @@ import com.visual.mobilejobsearch.database.PostError;
 import com.visual.mobilejobsearch.database.api.APIAccess;
 import com.visual.mobilejobsearch.database.api.APIAccessFactory;
 import com.visual.mobilejobsearch.database.objects.Register;
-import com.visual.mobilejobsearch.persistent.Preferences;
 
-public class GeneralDetails extends FragmentActivity{
+public class GeneralDetails extends Activity{
 	
-	EditText nameEditText, passEditText, emailEditText, vorEditText,userEditText;
+	EditText nameEditText, passEditText, emailEditText, vorEditText,userEditText, passAgainEditText;
 	Button signUpButton;
-	String UserName, EmailAddress, Password, vorName, Name;
 	APIAccess api;
 	
 	
@@ -39,6 +38,7 @@ public class GeneralDetails extends FragmentActivity{
 		passEditText=(EditText)findViewById(R.id.signUpPassword);
 		vorEditText=(EditText)findViewById(R.id.signUpFirstName);
 		userEditText=(EditText)findViewById(R.id.signUpUsername);
+		passAgainEditText=(EditText) findViewById(R.id.signUpPasswordAgain);
 		
 		signUpButton = (Button)findViewById(R.id.signUpButton);
 		signUpButton.setOnClickListener(onClickSignUp());
@@ -55,67 +55,44 @@ public class GeneralDetails extends FragmentActivity{
 			@Override
 			public void onClick(View arg0) {
 				
-				UserName=userEditText.getText().toString();
-				EmailAddress=emailEditText.getText().toString();
-				Password=passEditText.getText().toString();
-				Name=nameEditText.getText().toString();
-				vorName=vorEditText.getText().toString();
-//				doPost.setNewPost(UserName,EmailAddress, Password, Name, vorName);
-//				Toast.makeText(getActivity(), "Registering the account",Toast.LENGTH_SHORT).show();
-				//new HttpAsyncTaskPost().execute("http://preparo.unter-guten-freunden.de/api/v1/register/");
+//				
+//				Preferences preferences = new Preferences(getApplicationContext());
+//				preferences.putFirstName(vorEditText.getText().toString());
+//				preferences.putLastName(nameEditText.getText().toString());
 				
-				Preferences preferences = new Preferences(getApplicationContext());
-				preferences.putFirstName(vorEditText.getText().toString());
-				preferences.putLastName(nameEditText.getText().toString());
+				if(passEditText.getText().toString().matches(passAgainEditText.getText().toString())){
 				
-				api=APIAccessFactory.basicAuthInstance(UserName, Password, getApplicationContext());
+				api=APIAccessFactory.basicAuthInstance(userEditText.getText().toString(), passEditText.getText().toString(), getApplicationContext());
 				api.getRequestQueue().add(api.newPostRegisterRequest(
-						EmailAddress, 
-						vorName, 
-						Name, 
-						Password,
-						UserName,
+						emailEditText.getText().toString(), 
+						vorEditText.getText().toString(), 
+						nameEditText.getText().toString(), 
+						passEditText.getText().toString(),
+						userEditText.getText().toString(),
 						new Listener<Register>() {
 							@Override
 							public void onResponse(Register response) {
 								// TODO Auto-generated method stub
-								Toast.makeText(getApplicationContext(), "Data has been sent", Toast.LENGTH_SHORT).show();
+								Toast.makeText(getApplicationContext(), R.string.doneSignUp, Toast.LENGTH_SHORT).show();
+								finish();
 							}
 						}, 
 						new APIErrorListener() {
 							
 							@Override
 							public void onErrorResponse(int statusCode, PostError error) {
-								Toast.makeText(getApplicationContext(), error.error.error, Toast.LENGTH_SHORT).show();
-								
-								
+								Toast toast = Toast.makeText(getApplicationContext(),R.string.errorSignUp, Toast.LENGTH_LONG);
+								toast.setGravity(Gravity.CENTER, 0, 0);
+								toast.show();
 							}
 						}));
+				}
+				
+				else{
+					Toast.makeText(getApplicationContext(), R.string.errorSignUpPassword, Toast.LENGTH_SHORT).show();
+				}
 			}
 		};
    }
-	
-
-//	class HttpAsyncTaskPost extends AsyncTask<String, Void, String> {
-//		
-//		Person person;
-//	    @Override
-//	    protected String doInBackground(String... urls) {
-//
-//	        person = new Person();
-//	        person.setEmail(emailEditText.getText().toString());
-//	        person.setUsername(userEditText.getText().toString());
-//	        person.setPassword(passEditText.getText().toString());
-//	        person.setVorname(vorEditText.getText().toString());
-//	        person.setName(nameEditText.getText().toString());
-//	        
-//	        return registerUser.POST(urls[0],person);
-//	    }
-//	    // onPostExecute displays the results of the AsyncTask.
-//	    @Override
-//	    protected void onPostExecute(String result) {
-//	        Toast.makeText(getApplicationContext(), "Data Sent!", Toast.LENGTH_LONG).show();
-//	   }
-//	}
 	
 }

@@ -2,18 +2,27 @@ package SlidingBar;
 
 import qualification.ExpandableProfileListAdapter;
 import qualification.ExpandableProfileListAdapter.HeaderItem;
+import SlidingBar.mediaactivity.ProfileMedia;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -40,28 +49,34 @@ public class ProfileFragment extends Fragment {
 	final static String LANGUAGE = "Language";
 	final static String SKILLS = "Skills & Expertise";
 	final static String INTERESTS = "Interests";
+	private static final int SELECT_PHOTO = 100;
+	private static final int SELECT_VIDEO = 101;
 	
 	APIAccess api;
-	
-	ImageButton btnAddQualification;
+	private Bitmap bitmap;
 	
 	TextView profileName;
+	ImageView profileImageView;
+	VideoView profileVideoView;
 	
 	ExpandableProfileListAdapter listAdapter;
     ExpandableListView expListView;
     private static String dName, Iname, Von, Bis, Address;
 
     Preferences preferences;
-//    @Override
-//    public void onPause() {
-//    	HomeFragment fragment = new HomeFragment();
-//    	FragmentManager fragmentManager = getFragmentManager();
-//		fragmentManager.beginTransaction()
-//				.replace(R.id.frame_container, fragment).addToBackStack(null).commit();
-//		// Toast.makeText(getActivity(), "onPause", Toast.LENGTH_SHORT).show();
-//    	super.onPause();
-//    }
     
+    ProfileMedia profileMedia;
+    
+	protected static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+	protected static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
+	public static final int MEDIA_TYPE_IMAGE = 1;
+	public static final int MEDIA_TYPE_VIDEO = 2;
+
+	// directory name to store captured images and videos
+	protected static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
+	
+	protected Uri fileUri; // file url to store image/video
+//    
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -73,6 +88,20 @@ public class ProfileFragment extends Fragment {
         listAdapter = new ExpandableProfileListAdapter(getActivity());
  
         profileName = (TextView) rootView.findViewById(R.id.profileName);
+        
+        profileMedia = new ProfileMedia();
+        
+        TextView loadImage = (TextView)rootView.findViewById(R.id.profileImageText);
+        loadImage.setOnClickListener(onClickImageViewLoader(rootView));
+        
+        TextView loadVideo = (TextView) rootView.findViewById(R.id.profileVideoText);
+        loadVideo.setOnClickListener(onClickProfileVideoLoader(rootView));
+        
+         profileImageView = (ImageView) rootView.findViewById(R.id.profileImage);
+        profileImageView.setOnClickListener(onClickImageView(rootView));
+        
+         profileVideoView = (VideoView)rootView.findViewById(R.id.profile_video);
+      
         
         
         preferences = new Preferences(getActivity());
@@ -201,7 +230,8 @@ public class ProfileFragment extends Fragment {
 						// set dialog message
 						alertDialogBuilder
 							.setMessage(R.string.sure)
-							.setCancelable(false)
+							.setCancelable(true)
+							.setIcon(R.drawable.ic_delete)
 							.setPositiveButton(R.string.yes,
 									new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,int id) {
@@ -239,7 +269,7 @@ public class ProfileFragment extends Fragment {
 								public void onClick(DialogInterface dialog,int id) {
 									// if this button is clicked, just close
 									// the dialog box and do nothing
-									dialog.cancel();
+									dialog.dismiss();
 								}
 							})
 							.create().show();
@@ -257,7 +287,8 @@ public class ProfileFragment extends Fragment {
 					// set dialog message
 					alertDialogBuilderCompetence
 						.setMessage(R.string.sure)
-						.setCancelable(false)
+						.setCancelable(true)
+						.setIcon(R.drawable.ic_delete)
 						.setPositiveButton(R.string.yes,
 								new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,int id) {
@@ -309,5 +340,162 @@ public class ProfileFragment extends Fragment {
 		         
         return rootView;
     }
-    
+	
+	
+	private OnClickListener onClickImageView(View rootView) {
+		// TODO Auto-generated method stub
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				captureImage();
+				
+			}
+		};
+	}
+	
+	
+	
+	private OnClickListener onClickImageViewLoader(View rootView) {
+	// TODO Auto-generated method stub
+	return new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+					captureImage();
+		}
+	};
+}
+
+
+	
+	
+private OnClickListener onClickProfileVideoLoader(View rootView) {
+	return new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+		
+			recordVideo();
+			
+		}
+	};
+}
+
+/*
+ * Capturing Camera Image will lauch camera app requrest image capture
+ */
+private void captureImage() {
+	Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+	fileUri = profileMedia.getOutputMediaFileUri(profileMedia.MEDIA_TYPE_IMAGE);
+
+	intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+	// start the image capture Intent
+	startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+	
+}
+
+
+/*
+ * Recording video
+ */
+private void recordVideo() {
+	Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+	fileUri = profileMedia.getOutputMediaFileUri(profileMedia.MEDIA_TYPE_VIDEO);
+
+	// set video quality
+	intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+
+	intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file
+														// name
+
+	// start the video capture Intent
+	startActivityForResult(intent, CAMERA_CAPTURE_VIDEO_REQUEST_CODE);
+}
+//
+
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	// if the result is capturing Image
+	
+	Log.e("OnActivityResult", String.valueOf(getActivity().RESULT_OK));
+	
+	if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+		
+		Log.e("ResultCode", String.valueOf(resultCode));
+		if (resultCode == getActivity().RESULT_OK) {
+			// successfully captured the image
+			// display it in image view
+			Log.e("ResultCode", String.valueOf(getActivity().RESULT_OK));
+			previewCapturedImage();
+		} else if (resultCode == getActivity().RESULT_CANCELED) {
+			// user cancelled Image capture
+			Toast.makeText(getActivity(),
+					"User cancelled image capture", Toast.LENGTH_SHORT)
+					.show();
+		} else {
+			// failed to capture image
+			Toast.makeText(getActivity(),
+					"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+					.show();
+		}
+	} else if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
+		if (resultCode == getActivity().RESULT_OK) {
+			// video successfully recorded
+			// preview the recorded video
+			previewVideo();
+		} else if (resultCode ==getActivity().RESULT_CANCELED) {
+			// user cancelled recording
+			Toast.makeText(getActivity(),
+					"User cancelled video recording", Toast.LENGTH_SHORT)
+					.show();
+		} else {
+			// failed to record video
+			Toast.makeText(getActivity(),
+					"Sorry! Failed to record video", Toast.LENGTH_SHORT)
+					.show();
+		}
+	}
+}
+public void previewCapturedImage() {
+	try {
+		// hide video preview
+
+		profileImageView.setVisibility(View.VISIBLE);
+
+		// bimatp factory
+		BitmapFactory.Options options = new BitmapFactory.Options();
+
+		// downsizing image as it throws OutOfMemory Exception for larger
+		// images
+		options.inSampleSize = 8;
+
+		final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(),
+				options);
+
+		profileImageView.setImageBitmap(bitmap);
+	} catch (NullPointerException e) {
+		e.printStackTrace();
+	}
+}
+
+/*
+ * Previewing recorded video
+ */
+public void previewVideo() {
+	try {
+		// hide image preview
+
+		profileVideoView.setVisibility(View.VISIBLE);
+		profileVideoView.setVideoPath(fileUri.getPath());
+		// start playing
+		profileVideoView.start();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
 }

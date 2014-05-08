@@ -1,9 +1,9 @@
 package com.visual.mobilejobsearch;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,7 +20,7 @@ import com.visual.mobilejobsearch.database.api.APIAccessFactory;
 import com.visual.mobilejobsearch.database.calls.GetLogin;
 import com.visual.mobilejobsearch.persistent.Preferences;
 
-public class MainActivity extends FragmentActivity {
+public class LoginFragment extends Activity {
 	
 	Button registerTextView, loginButton;
 	EditText userName, password;
@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getApplicationContext(), "Please fill up the details",Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(MainActivity.this, GeneralDetails.class);
+			Intent intent = new Intent(LoginFragment.this, GeneralDetails.class);
 			 startActivity(intent);
 			 
 			}
@@ -67,7 +67,7 @@ public class MainActivity extends FragmentActivity {
 						Log.e("apiKey", response.key);
 						
 						finish();						
-						Intent intent = new Intent(MainActivity.this, OpeningApplicationFragment.class);
+						Intent intent = new Intent(LoginFragment.this, DrawerActivity.class);
 						 startActivity(intent);
 						
 					}
@@ -81,44 +81,12 @@ public class MainActivity extends FragmentActivity {
 					
 				}));
 				
-				//new HttpAsyncTaskGet().execute("http://preparo.unter-guten-freunden.de/api/v1/token/auth/");
-				
 			}
 		});
 		
   
 		
 	}
-	
-//	class HttpAsyncTaskGet extends AsyncTask<String, Void, String> {
-//		
-//		Person person;
-//
-//		@Override
-//		protected String doInBackground(String... urls) {
-//
-//		        person = new Person();
-//		        person.setLoginUserName(userName.getText().toString());
-//		        person.setLoginPassword(password.getText().toString());
-//			
-//			return loginUser.GET(urls[0],person);
-//		}
-//
-//	}
-	
-	
-	
-	
-//	@Override
-//	public void onBackPressed() {
-//		// TODO Auto-generated method stub
-//		i++;
-//		Toast.makeText(getApplicationContext(), "od",Toast.LENGTH_SHORT).show();
-//		if(i==2){
-//		finish();
-//		}
-//		super.onBackPressed();
-//	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

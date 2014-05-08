@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author hiren
- *
- */
-package SlidingBar;
-

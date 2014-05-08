@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -74,70 +75,79 @@ public class AddQualificationDialog extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
+				
+				if(!degreeName.getText().toString().isEmpty() && !institutName.getText().toString().isEmpty()  && !von.getText().toString().isEmpty() ){
+					
+					api.getRequestQueue().add(api.newPostDegree(degreeName.getText().toString(),
+							new Listener<Degree>() {
 
-				api.getRequestQueue().add(api.newPostDegree(degreeName.getText().toString(),
-						new Listener<Degree>() {
+						@Override
+						public void onResponse(Degree response) { 
+							idDegree=response.id;
+						}
+					}, 
+					new APIErrorListener() {
 
-					@Override
-					public void onResponse(Degree response) { 
-						idDegree=response.id;
-					}
-				}, 
-				new APIErrorListener() {
+						@Override
+						public void onErrorResponse(int statusCode, PostError error) {
+							// TODO Auto-generated method stub
 
-					@Override
-					public void onErrorResponse(int statusCode, PostError error) {
-						// TODO Auto-generated method stub
-
-					}
-				}));
+						}
+					}));
 
 
-				api.getRequestQueue().add(api.newPostInstitute(institutName.getText().toString(),
-						street.getText().toString(),
-						zipcode.getText().toString(),
-						city.getText().toString(),
-						new Listener<Institute>() {
+					api.getRequestQueue().add(api.newPostInstitute(institutName.getText().toString(),
+							street.getText().toString(),
+							zipcode.getText().toString(),
+							city.getText().toString(),
+							new Listener<Institute>() {
 
-					@Override
-					public void onResponse(Institute response) {
-						idInstitute=response.id;
+						@Override
+						public void onResponse(Institute response) {
+							idInstitute=response.id;
 
-					}
+						}
 
-				},
-				new APIErrorListener() {
+					},
+					new APIErrorListener() {
 
-					@Override
-					public void onErrorResponse(int statusCode, PostError error) {
-						Toast.makeText(getActivity(), "Something is wrong..please try again..", Toast.LENGTH_SHORT).show();
+						@Override
+						public void onErrorResponse(int statusCode, PostError error) {
+							Toast.makeText(getActivity(), "Something is wrong..please try again..", Toast.LENGTH_SHORT).show();
 
-					}
-				}));
+						}
+					}));
 
-				api.getRequestQueue().add(api.newPostQualification(
-						idDegree,
-						idInstitute,
-						von.getText().toString(),
-						bis.getText().toString(),
-						new Listener<Qualification>() {
+					api.getRequestQueue().add(api.newPostQualification(
+							idDegree,
+							idInstitute,
+							von.getText().toString(),
+							bis.getText().toString(),
+							new Listener<Qualification>() {
 
-							@Override
-							public void onResponse(Qualification response) {
-								//updateListView();
+								@Override
+								public void onResponse(Qualification response) {
+									//updateListView();
 
-							}
-						}, new APIErrorListener() {
+								}
+							}, new APIErrorListener() {
 
-							@Override
-							public void onErrorResponse(int statusCode, PostError error) {
-								Log.e("QualificationError","Qualification Errror");
+								@Override
+								public void onErrorResponse(int statusCode, PostError error) {
+									Log.e("QualificationError","Qualification Errror");
 
-							}
-						}));
-				//						
+								}
+							}));
+					
+					
+				}else{
+
+					Toast toast = Toast.makeText(getActivity(),R.string.toastQualification, Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();					
 
 			}
+		  }
 		};
 	}
 	

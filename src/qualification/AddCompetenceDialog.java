@@ -15,6 +15,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,26 +68,37 @@ public class AddCompetenceDialog extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				
-				
-				api.getRequestQueue().add(api.newPostCompetenceType(nameEditText.getText().toString(),
-						new Listener<CompetenceType>() {
+				if(!nameEditText.getText().toString().isEmpty()){
+					
+					api.getRequestQueue().add(api.newPostCompetenceType(nameEditText.getText().toString(),
+							new Listener<CompetenceType>() {
 
-							@Override
-							public void onResponse(CompetenceType response) {
-							postCompetence(response.id);
-							updateListViewCompetence();
-							}
-						},
-						new APIErrorListener() {
-							
-							@Override
-							public void onErrorResponse(int statusCode, PostError error) {
-								Log.e("CompetenceType", "Error");
+								@Override
+								public void onResponse(CompetenceType response) {
+								postCompetence(response.id);
+								updateListViewCompetence();
+								}
+							},
+							new APIErrorListener() {
 								
-							}
-						}));
+								@Override
+								public void onErrorResponse(int statusCode, PostError error) {
+									Log.e("CompetenceType", "Error");
+									
+								}
+							}));
+					
+					
+					
+				}else{
+				
+					Toast toast = Toast.makeText(getActivity(),R.string.toastQualification, Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+			
 				
 			}
+		  }
 		};
 	}
 	

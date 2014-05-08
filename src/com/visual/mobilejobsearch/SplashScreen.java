@@ -35,11 +35,11 @@ public class SplashScreen extends Activity {
                 // Start your app main activity
             	
             	if(preferences.getUser()=="" && preferences.getApiKey()==""){
-                Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                Intent i = new Intent(SplashScreen.this, LoginFragment.class);
                 startActivity(i);
                 
             	}else{
-            		Intent intent = new Intent(SplashScreen.this, OpeningApplicationFragment.class);
+            		Intent intent = new Intent(SplashScreen.this,DrawerActivity.class);
 					 startActivity(intent);
             	}
                 // close this activity
@@ -48,25 +48,5 @@ public class SplashScreen extends Activity {
         }, SPLASH_TIME_OUT);
     }
     
-//    @Override
-//    protected void onDestroy() {
-//    	// TODO Auto-generated method stub
-//    	finish();
-//    	super.onDestroy();
-//    }
-//    
-//    @Override
-//    public void onDetachedFromWindow() {
-//    	Toast.makeText(getApplicationContext(), "onDeatache", Toast.LENGTH_SHORT).show();    	// TODO Auto-generated method stub
-//    	finish();
-//    	super.onDetachedFromWindow();
-//    }
-//    
-//    @Override
-//    public void onBackPressed() {
-//    	// TODO Auto-generated method stub
-//    	Toast.makeText(getApplicationContext(), "onBackPressed", Toast.LENGTH_SHORT).show();
-//    	super.onBackPressed();
-//    }
  
 }

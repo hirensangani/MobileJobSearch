@@ -36,13 +36,13 @@ public class Preferences {
 		return settings.getString(PREF_USER_DEGREE_INSTITUTE, null);
 	}
 	
-	public String getFirstName() {
-		return settings.getString(PREF_USER_FIRSTNAME, null);
-	}
-	
-	public String getLastName() {
-		return settings.getString(PREF_USER_LASTNAME, null);
-	}
+//	public String getFirstName() {
+//		return settings.getString(PREF_USER_FIRSTNAME, null);
+//	}
+//	
+//	public String getLastName() {
+//		return settings.getString(PREF_USER_LASTNAME, null);
+//	}
 	
 	//------------------------***************----------------****************----------------********************-------------**********-------------//
 	public void putApiKey(String apiKey) {
@@ -74,17 +74,17 @@ public class Preferences {
 		editor.commit();
 	}
 	
-	public void putFirstName(String firstname){
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(PREF_USER_FIRSTNAME, firstname);
-		editor.commit();
-	}
-	
-	public void putLastName(String lastname){
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(PREF_USER_LASTNAME, lastname);
-		editor.commit();
-	}
+//	public void putFirstName(String firstname){
+//		SharedPreferences.Editor editor = settings.edit();
+//		editor.putString(PREF_USER_FIRSTNAME, firstname);
+//		editor.commit();
+//	}
+//	
+//	public void putLastName(String lastname){
+//		SharedPreferences.Editor editor = settings.edit();
+//		editor.putString(PREF_USER_LASTNAME, lastname);
+//		editor.commit();
+//	}
 	
 	//------------------------***************----------------****************----------------********************-------------**********-------------//
 }
